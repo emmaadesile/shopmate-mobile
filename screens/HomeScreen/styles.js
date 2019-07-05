@@ -1,8 +1,4 @@
-import styled from "styled-components";
-import { Dimensions } from "react-native";
-
-const screenWidth = Dimensions.get("window").width;
-const screenHeight = Dimensions.get("window").height;
+import styled from "styled-components/native";
 
 const Container = styled.View`
   width: 100%;
@@ -64,13 +60,6 @@ const Image = styled.Image`
   height: 100%;
 `;
 
-const SvgWrapper = styled.View`
-  height: 100%;
-  width: ${screenWidth};
-  align-items: center;
-  justify-content: center;
-`;
-
 const BodyText = styled.View`
   position: absolute;
   bottom: 95px;
@@ -86,6 +75,5 @@ export {
   PageText,
   ImageContainer,
   Image,
-  SvgWrapper,
   BodyText
 };

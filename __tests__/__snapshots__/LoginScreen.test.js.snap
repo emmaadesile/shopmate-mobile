@@ -1,0 +1,211 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Login Screen renders the the login screen 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "flexBasis": 0,
+        "flexGrow": 1,
+        "flexShrink": 1,
+        "height": "100%",
+        "justifyContent": "center",
+        "paddingLeft": 20,
+        "paddingRight": 20,
+        "width": "100%",
+      },
+    ]
+  }
+>
+  <Image
+    source={1}
+    style={
+      Array [
+        Object {
+          "height": 54,
+          "width": 114,
+        },
+      ]
+    }
+  />
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "#efb961",
+          "fontSize": 24,
+          "fontWeight": "normal",
+          "height": 62,
+          "marginTop": 40,
+          "textAlign": "center",
+          "width": 300,
+        },
+      ]
+    }
+  >
+    Login
+  </Text>
+  <View
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "justifyContent": "center",
+          "width": "100%",
+        },
+      ]
+    }
+  >
+    <TextInput
+      allowFontScaling={true}
+      keyboardType="email-address"
+      placeholder="Email"
+      rejectResponderTermination={true}
+      style={
+        Array [
+          Object {
+            "borderColor": "#d8d8d8",
+            "borderRadius": 30,
+            "borderWidth": 1,
+            "fontSize": 17,
+            "height": 50,
+            "marginBottom": 20,
+            "paddingLeft": 30,
+            "width": "100%",
+          },
+        ]
+      }
+      underlineColorAndroid="transparent"
+    />
+    <TextInput
+      allowFontScaling={true}
+      placeholder="Password"
+      rejectResponderTermination={true}
+      secureTextEntry={true}
+      style={
+        Array [
+          Object {
+            "borderColor": "#d8d8d8",
+            "borderRadius": 30,
+            "borderWidth": 1,
+            "fontSize": 17,
+            "height": 50,
+            "marginBottom": 20,
+            "paddingLeft": 30,
+            "width": "100%",
+          },
+        ]
+      }
+      underlineColorAndroid="transparent"
+    />
+    <View
+      accessible={true}
+      isTVSelectable={true}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+          "width": "100%",
+        }
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "#efb961",
+              "borderRadius": 30,
+              "height": 50,
+              "justifyContent": "center",
+              "shadowColor": "rgba(0, 0, 0, 0.15)",
+              "shadowOffset": Object {
+                "height": 10,
+                "width": 0,
+              },
+              "shadowOpacity": 1,
+              "shadowRadius": 20,
+              "width": "100%",
+            },
+          ]
+        }
+      >
+        <Text
+          style={
+            Array [
+              Object {
+                "color": "#fff",
+                "fontSize": 18,
+                "fontWeight": "bold",
+                "letterSpacing": 2,
+                "textTransform": "uppercase",
+              },
+            ]
+          }
+        >
+          Sign in
+        </Text>
+      </View>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "justifyContent": "center",
+        }
+      }
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#c4c4c4",
+              "fontSize": 17,
+              "marginTop": 25,
+            },
+          ]
+        }
+      >
+        Not a member?
+      </Text>
+      <View
+        accessible={true}
+        isTVSelectable={true}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+      >
+        <Text
+          color="#EFB961"
+          style={
+            Array [
+              Object {
+                "color": "#EFB961",
+                "fontSize": 17,
+                "marginTop": 25,
+              },
+            ]
+          }
+        >
+          Sign up
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
