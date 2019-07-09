@@ -34,12 +34,12 @@ const BodyText = styled.Text`
 const Input = styled.TextInput`
   height: 50px;
   width: 100%;
-  margin-bottom: 20px;
-  padding-left: 30px;
-  border-color: #d8d8d8;
-  border-radius: 30px;
+  margin-bottom: 15px;
+  padding-left: 15px;
+  border-color: ${props => (props.borderColor ? props.borderColor : "#d8d8d8")};
+  border-radius: 8px;
   border-width: 1px;
-  font-size: 17px;
+  font-size: 15px;
 `;
 
 const LoginButton = styled.View`
@@ -47,14 +47,16 @@ const LoginButton = styled.View`
   width: 100%;
   align-items: center;
   justify-content: center;
-  background-color: #efb961;
-  border-radius: 30px;
+  background-color: ${props =>
+    props.backgroundColor ? props.backgroundColor : "#efb961"};
+  border-radius: 8px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  margin-top: 10px;
 `;
 
 const ButtonText = styled.Text`
   color: #fff;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 2px;

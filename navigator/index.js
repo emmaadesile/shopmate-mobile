@@ -2,11 +2,13 @@ import { createStackNavigator, createAppContainer } from "react-navigation";
 import SignupScreen from "../screens/SignupScreen";
 import LoginScreen from "../screens/LoginScreen";
 import HomeScreen from "../screens/HomeScreen";
+import ShoppingScreen from "../screens/ShoppingScreen";
 
-const HomeStack = createStackNavigator({
+const AppStack = createStackNavigator({
   Home: HomeScreen,
   Signup: SignupScreen,
-  Login: LoginScreen
+  Login: LoginScreen,
+  Shop: ShoppingScreen
 });
 
-export default (App = createAppContainer(HomeStack));
+export default (App = createAppContainer(AppStack));

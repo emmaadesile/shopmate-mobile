@@ -44,7 +44,7 @@ exports[`Login Screen renders the the login screen 1`] = `
       ]
     }
   >
-    Login
+    Sign in to your Account
   </Text>
   <View
     style={
@@ -59,27 +59,36 @@ exports[`Login Screen renders the the login screen 1`] = `
   >
     <TextInput
       allowFontScaling={true}
+      borderColor="#d8d8d8"
       keyboardType="email-address"
+      onBlur={[Function]}
+      onChangeText={[Function]}
+      onFocus={[Function]}
       placeholder="Email"
       rejectResponderTermination={true}
       style={
         Array [
           Object {
             "borderColor": "#d8d8d8",
-            "borderRadius": 30,
+            "borderRadius": 8,
             "borderWidth": 1,
-            "fontSize": 17,
+            "fontSize": 15,
             "height": 50,
-            "marginBottom": 20,
-            "paddingLeft": 30,
+            "marginBottom": 15,
+            "paddingLeft": 15,
             "width": "100%",
           },
         ]
       }
       underlineColorAndroid="transparent"
+      value=""
     />
     <TextInput
       allowFontScaling={true}
+      borderColor="#d8d8d8"
+      onBlur={[Function]}
+      onChangeText={[Function]}
+      onFocus={[Function]}
       placeholder="Password"
       rejectResponderTermination={true}
       secureTextEntry={true}
@@ -87,17 +96,18 @@ exports[`Login Screen renders the the login screen 1`] = `
         Array [
           Object {
             "borderColor": "#d8d8d8",
-            "borderRadius": 30,
+            "borderRadius": 8,
             "borderWidth": 1,
-            "fontSize": 17,
+            "fontSize": 15,
             "height": 50,
-            "marginBottom": 20,
-            "paddingLeft": 30,
+            "marginBottom": 15,
+            "paddingLeft": 15,
             "width": "100%",
           },
         ]
       }
       underlineColorAndroid="transparent"
+      value=""
     />
     <View
       accessible={true}
@@ -116,14 +126,16 @@ exports[`Login Screen renders the the login screen 1`] = `
       }
     >
       <View
+        backgroundColor="rgba(239,185,97,0.44)"
         style={
           Array [
             Object {
               "alignItems": "center",
-              "backgroundColor": "#efb961",
-              "borderRadius": 30,
+              "backgroundColor": "rgba(239,185,97,0.44)",
+              "borderRadius": 8,
               "height": 50,
               "justifyContent": "center",
+              "marginTop": 10,
               "shadowColor": "rgba(0, 0, 0, 0.15)",
               "shadowOffset": Object {
                 "height": 10,
@@ -141,7 +153,7 @@ exports[`Login Screen renders the the login screen 1`] = `
             Array [
               Object {
                 "color": "#fff",
-                "fontSize": 18,
+                "fontSize": 16,
                 "fontWeight": "bold",
                 "letterSpacing": 2,
                 "textTransform": "uppercase",
@@ -149,7 +161,7 @@ exports[`Login Screen renders the the login screen 1`] = `
             ]
           }
         >
-          Sign in
+           Sign in
         </Text>
       </View>
     </View>
@@ -202,7 +214,7 @@ exports[`Login Screen renders the the login screen 1`] = `
             ]
           }
         >
-          Sign up
+           Sign up
         </Text>
       </View>
     </View>
