@@ -8,7 +8,7 @@ const screenHeight = Dimensions.get("window").height;
 class Loader extends React.Component {
   state = {
     top: new Animated.Value(0),
-    opacity: new Animated.Value(1)
+    opacity: new Animated.Value(0)
   };
 
   componentDidMount() {

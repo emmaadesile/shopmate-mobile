@@ -5,10 +5,9 @@ import {
   View,
   Text
 } from "react-native";
-import axios from "axios";
+import { connect } from "react-redux";
 import { Keyboard } from "react-native";
-import { validateSignupForm } from "../../helpers/formValidation";
-import SuccessLoader from "../../components/SuccessLoader";
+import { BASEURL } from "react-native-dotenv";
 
 import {
   Container,
@@ -21,8 +20,9 @@ import {
   ButtonText
 } from "./styles";
 import Loader from "../../components/Loader";
-
-const baseURL = `https://mobilebackend.turing.com`;
+import SuccessLoader from "../../components/SuccessLoader";
+import { validateSignupForm } from "../../helpers/formValidation";
+import signup from "../../store/actions/signupAction";
 
 class SignupScreen extends React.Component {
   static navigationOptions = {
@@ -67,7 +67,7 @@ class SignupScreen extends React.Component {
     }));
   };
 
-  handleLogin = () => {
+  handleLogin = async () => {
     this.closeKeyboard();
     this.setState({
       name: "",
@@ -75,26 +75,18 @@ class SignupScreen extends React.Component {
       password: ""
     });
 
-    this.setState({ isLoading: true });
+    const { name, email, password } = this.state;
+    const { dispatch } = this.props;
 
-    setTimeout(() => {
-      this.setState({ isLoading: false });
-      this.setState({ isSuccessful: true });
-    }, 2000);
+    try {
+      await dispatch(signup(name, email, password));
 
-    setTimeout(() => {
-      this.props.navigation.push("Shop");
-    }, 3000);
-
-    // const { name, email, password } = this.state;
-    // axios
-    //   .post(`${baseURL}/customers`, {
-    //     name,
-    //     email,
-    //     password
-    //   })
-    //   .then(response => console.log(response.data))
-    //   .catch(error => console.log(error));
+      if (this.props.isSuccessful) {
+        this.props.navigation.push("Shop");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   closeKeyboard = () => {
@@ -172,12 +164,19 @@ class SignupScreen extends React.Component {
               </TouchableOpacity>
             </View>
           </Form>
-          <Loader isLoading={this.state.isLoading} />
-          <SuccessLoader isSuccessful={this.state.isSuccessful} />
+          <Loader isLoading={this.props.loading} />
+          <SuccessLoader isSuccessful={this.props.isSuccessful} />
         </Container>
       </TouchableWithoutFeedback>
     );
   }
 }
 
-export default SignupScreen;
+const mapStateToProps = state => ({
+  loading: state.signup.loading,
+  user: state.signup.user,
+  error: state.signup.error,
+  isSuccessful: state.signup.isSuccessful
+});
+
+export default connect(mapStateToProps)(SignupScreen);
