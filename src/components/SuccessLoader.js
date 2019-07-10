@@ -54,7 +54,9 @@ class SuccessLoader extends React.Component {
           loop={false}
           ref={animation => (this.animation = animation)}
         />
-        <Message>Signup Successful</Message>
+        <Message>
+          {this.props.screen === "signup" ? "Signup Successful" : null}
+        </Message>
       </AnimatedContainer>
     );
   }

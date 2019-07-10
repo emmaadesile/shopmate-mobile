@@ -28,14 +28,16 @@ const signup = (name, email, password) => dispatch => {
       email,
       password
     })
-    .then(result => {
+    .then(response => {
       dispatch(signupLoading(false));
 
-      if (result.status === 200) {
-        dispatch(signupSuccess(result.data));
+      if (response.status === 200) {
+        dispatch(signupSuccess(response.data));
       }
     })
-    .catch(error => dispatch(signupError(error.message)));
+    .catch(error => {
+      dispatch(signupError(error.message));
+    });
 };
 
 export default signup;
