@@ -18,14 +18,16 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <AppIntroSlider
-        slides={slides}
-        onDone={this._onDone}
-        nextLabel="Continue"
-        bottomButton
-        buttonStyle={styles.buttonStyle}
-        buttonTextStyle={styles.buttonTextStyle}
-      />
+      <>
+        <AppIntroSlider
+          slides={slides}
+          onDone={this._onDone}
+          nextLabel="Continue"
+          bottomButton
+          buttonStyle={styles.buttonStyle}
+          buttonTextStyle={styles.buttonTextStyle}
+        />
+      </>
     );
   }
 }
@@ -34,14 +36,15 @@ const styles = StyleSheet.create({
   buttonStyle: {
     backgroundColor: "#3F3D56",
     height: 50,
-    borderRadius: 30,
+    borderRadius: 10,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.15,
     elevation: 1
   },
   buttonTextStyle: {
-    fontWeight: "bold"
+    fontWeight: "bold",
+    fontSize: 16
   },
   image: {
     width: 250,
@@ -49,7 +52,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: "#FFFFFF",
-    fontSize: 16
+    fontSize: 17
   }
 });
 
