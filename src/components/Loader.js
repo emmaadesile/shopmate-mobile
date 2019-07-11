@@ -49,7 +49,7 @@ class Loader extends React.Component {
         }}
       >
         <Lottie
-          source={require("../assets/lottie-loading-fluid.json")}
+          source={require("../assets/loading-1.json")}
           autoPlay={false}
           loop
           ref={animation => (this.animation = animation)}
