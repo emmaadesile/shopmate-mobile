@@ -4,6 +4,8 @@ import {
   SIGNIN_ERROR
 } from "../actions/signinAction";
 
+import { SAVE_TOKEN } from "../actions/authAction";
+
 const initialState = {
   loading: false,
   isSuccessful: false,
@@ -20,6 +22,7 @@ const reducer = (state = initialState, action) => {
       };
 
     case SIGNIN_SUCCESS:
+    case SAVE_TOKEN:
       return {
         ...state,
         loading: false,
@@ -34,6 +37,7 @@ const reducer = (state = initialState, action) => {
         error: action.payload,
         isSuccessful: false
       };
+
     default:
       return state;
   }

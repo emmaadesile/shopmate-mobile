@@ -77,20 +77,21 @@ class LoginScreen extends React.Component {
       await dispatch(signin(email, password));
 
       if (this.props.isSuccessful) {
-        this.redirectToShoppingScreen();
+        this.props.navigation.navigate("Shop");
       }
     } catch (error) {
       console.log(error);
     }
   };
 
-  redirectToShoppingScreen = () => {
-    const resetAction = StackActions.reset({
-      index: 0,
-      actions: [NavigationActions.navigate({ routeName: "Shop" })]
-    });
-    this.props.navigation.dispatch(resetAction);
-  };
+  // redirectToShoppingScreen = () => {
+  //   const resetAction = StackActions.reset({
+  //     index: 0,
+  //     key: undefined,
+  //     actions: [NavigationActions.navigate({ routeName: "Shop" })]
+  //   });
+  //   this.props.navigation.dispatch(resetAction);
+  // };
 
   render() {
     return (
@@ -144,7 +145,9 @@ class LoginScreen extends React.Component {
               }}
             >
               <SubText>Not a member?</SubText>
-              <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
+              <TouchableOpacity
+                onPress={() => this.props.navigation.push("Signup")}
+              >
                 <SubText color="#EFB961"> Sign up</SubText>
               </TouchableOpacity>
             </View>

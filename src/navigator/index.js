@@ -1,14 +1,39 @@
-import { createStackNavigator, createAppContainer } from "react-navigation";
+import {
+  createStackNavigator,
+  createSwitchNavigator,
+  createAppContainer
+} from "react-navigation";
 import SignupScreen from "../screens/SignupScreen";
 import LoginScreen from "../screens/LoginScreen";
-import HomeScreen from "../screens/HomeScreen";
+import AppIntroScreen from "../screens/AppIntroScreen";
 import ShoppingScreen from "../screens/ShoppingScreen";
+import AuthLoadingScreen from "../screens/AuthLoadingScreen";
+
+const AuthStack = createStackNavigator({
+  Login: LoginScreen,
+  Signup: SignupScreen
+});
+
+const AppIntroStack = createStackNavigator({
+  AppIntro: AppIntroScreen
+});
 
 const AppStack = createStackNavigator({
-  Home: HomeScreen,
-  Signup: SignupScreen,
-  Login: LoginScreen,
   Shop: ShoppingScreen
 });
 
-export default (App = createAppContainer(AppStack));
+const App = createAppContainer(
+  createSwitchNavigator(
+    {
+      AuthLoading: AuthLoadingScreen,
+      AppIntro: AppIntroStack,
+      Auth: AuthStack,
+      App: AppStack
+    },
+    {
+      initialRouteName: "AuthLoading"
+    }
+  )
+);
+
+export default App;

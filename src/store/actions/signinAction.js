@@ -1,5 +1,6 @@
 import axios from "axios";
 import { BASEURL } from "react-native-dotenv";
+import { saveUserToken, getUserToken, removeUserToken } from "./authAction";
 
 export const SIGNIN_LOADING = "SIGNIN_LOADING";
 export const SIGNIN_SUCCESS = "SIGNIN_SUCCESS";
@@ -29,16 +30,17 @@ const signin = (email, password) => dispatch => {
       password
     })
     .then(response => {
-      dispatch(signinLoading(false));
-
       if (response.status === 200) {
-        dispatch(signinSuccess(response.data));
+        dispatch(signinLoading(false));
+        dispatch(signinSuccess(response.data.customer));
+
+        const userToken = response.data.accessToken;
+        dispatch(saveUserToken("userToken", userToken));
       }
     })
     .catch(error => {
       dispatch(signinLoading(false));
-      alert(error.message);
-      dispatch(signinError(error.message));
+      dispatch(signinError(error.message || "Invalid login credentials"));
     });
 };
 

@@ -1,8 +1,9 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import AppIntroSlider from "react-native-app-intro-slider";
+import { AsyncStorage } from "react-native";
 
-export default class App extends React.Component {
+export default class AppIntro extends React.Component {
   static navigationOptions = {
     header: null
   };
@@ -11,9 +12,16 @@ export default class App extends React.Component {
     showRealApp: false
   };
 
-  _onDone = () => {
+  _onDone = async () => {
     const { navigate } = this.props.navigation;
-    return navigate("Signup");
+    try {
+      AsyncStorage.setItem("first_time", "true").then(() => {
+        this.setState({ showRealApp: true });
+        return navigate("Signup");
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   render() {

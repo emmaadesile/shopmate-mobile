@@ -18,6 +18,7 @@
     "import/no-namespace": "off",
     "class-methods-use-this": "off",
     "react-native/no-inline-styles": "off",
-    "react/jsx-boolean-value": "off"
+    "react/jsx-boolean-value": "off",
+    "valid-jsdoc": "warn"
   }
 }

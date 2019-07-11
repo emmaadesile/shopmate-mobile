@@ -3,8 +3,10 @@ import styled from "styled-components";
 import { Animated, Dimensions } from "react-native";
 import Lottie from "lottie-react-native";
 
+// Device screen height
 const screenHeight = Dimensions.get("window").height;
 
+// Loader used during loading state in app
 class Loader extends React.Component {
   state = {
     top: new Animated.Value(0),

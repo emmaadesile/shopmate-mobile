@@ -77,7 +77,7 @@ class SignupScreen extends React.Component {
       await dispatch(signup(name, email, password));
 
       if (this.props.isSuccessful) {
-        this.redirectToShoppingScreen();
+        this.props.navigation.navigate("Shop");
       }
     } catch (error) {
       console.log(error);
@@ -113,7 +113,6 @@ class SignupScreen extends React.Component {
               borderColor={this.state.isNameFocused && "#efb961"}
               value={this.state.name}
               placeholder="Name"
-              ref="name"
             />
             <Input
               onFocus={this.onEmailFocusChange}
@@ -160,9 +159,7 @@ class SignupScreen extends React.Component {
               }}
             >
               <SubText>Already a member?</SubText>
-              <TouchableOpacity
-                onPress={() => this.props.navigation.push("Login")}
-              >
+              <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
                 <SubText color="#EFB961"> Sign in</SubText>
               </TouchableOpacity>
             </View>
