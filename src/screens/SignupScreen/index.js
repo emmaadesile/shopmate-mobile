@@ -1,13 +1,8 @@
 import React from "react";
-import {
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-  View,
-  Text
-} from "react-native";
+import { TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
 import { connect } from "react-redux";
 import { Keyboard } from "react-native";
-import { BASEURL } from "react-native-dotenv";
+import { StackActions, NavigationActions } from "react-navigation";
 
 import {
   Container,
@@ -82,11 +77,19 @@ class SignupScreen extends React.Component {
       await dispatch(signup(name, email, password));
 
       if (this.props.isSuccessful) {
-        this.props.navigation.push("Shop");
+        this.redirectToShoppingScreen();
       }
     } catch (error) {
       console.log(error);
     }
+  };
+
+  redirectToShoppingScreen = () => {
+    const resetAction = StackActions.reset({
+      index: 0,
+      actions: [NavigationActions.navigate({ routeName: "Shop" })]
+    });
+    this.props.navigation.dispatch(resetAction);
   };
 
   closeKeyboard = () => {
