@@ -35,7 +35,7 @@ const Input = styled.TextInput`
   width: 100%;
   margin-bottom: 15px;
   padding-left: 15px;
-  border-color: ${props => (props.borderColor ? props.borderColor : "#d8d8d8")};
+  border-color: ${props => props.borderColor || "#d8d8d8"};
   border-radius: 8px;
   border-width: 1px;
   font-size: 15px;

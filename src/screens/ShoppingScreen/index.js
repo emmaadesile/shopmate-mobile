@@ -1,10 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+import { connect } from "react-redux";
 
 class ShoppingScreen extends React.Component {
   static navigationOptions = {
     header: null
   };
+
   render() {
     return (
       <Container>
