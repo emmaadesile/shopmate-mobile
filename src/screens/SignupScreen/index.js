@@ -2,7 +2,6 @@ import React from "react";
 import { TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
 import { connect } from "react-redux";
 import { Keyboard } from "react-native";
-import { StackActions, NavigationActions } from "react-navigation";
 
 import {
   Container,
@@ -15,7 +14,6 @@ import {
   ButtonText
 } from "./styles";
 import Loader from "../../components/Loader";
-import SuccessLoader from "../../components/SuccessLoader";
 import { validateSignupForm } from "../../helpers/formValidation";
 import signup from "../../store/actions/signupAction";
 
@@ -84,14 +82,6 @@ class SignupScreen extends React.Component {
     }
   };
 
-  redirectToShoppingScreen = () => {
-    const resetAction = StackActions.reset({
-      index: 0,
-      actions: [NavigationActions.navigate({ routeName: "Shop" })]
-    });
-    this.props.navigation.dispatch(resetAction);
-  };
-
   closeKeyboard = () => {
     Keyboard.dismiss();
   };
@@ -100,7 +90,7 @@ class SignupScreen extends React.Component {
     return (
       <TouchableWithoutFeedback onPress={this.closeKeyboard}>
         <Container behavior="padding" enabled>
-          <Logo source={require("../../assets/storex_logo.png")} />
+          <Logo source={require("../../../assets/storex_logo.png")} />
           <BodyText>Create An Account</BodyText>
           <Form>
             <Input
@@ -165,7 +155,6 @@ class SignupScreen extends React.Component {
             </View>
           </Form>
           <Loader isLoading={this.props.loading} />
-          <SuccessLoader isSuccessful={this.props.isSuccessful} />
         </Container>
       </TouchableWithoutFeedback>
     );

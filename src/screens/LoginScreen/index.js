@@ -6,11 +6,9 @@ import {
   Keyboard
 } from "react-native";
 import { connect } from "react-redux";
-import { StackActions, NavigationActions } from "react-navigation";
 import { validateLoginForm } from "../../helpers/formValidation";
 import signin from "../../store/actions/signinAction";
 import Loader from "../../components/Loader";
-import SuccessLoader from "../../components/SuccessLoader";
 
 import {
   Container,
@@ -84,20 +82,11 @@ class LoginScreen extends React.Component {
     }
   };
 
-  // redirectToShoppingScreen = () => {
-  //   const resetAction = StackActions.reset({
-  //     index: 0,
-  //     key: undefined,
-  //     actions: [NavigationActions.navigate({ routeName: "Shop" })]
-  //   });
-  //   this.props.navigation.dispatch(resetAction);
-  // };
-
   render() {
     return (
       <TouchableWithoutFeedback onPress={this.closeKeyboard}>
         <Container behavior="padding" enabled>
-          <Logo source={require("../../assets/storex_logo.png")} />
+          <Logo source={require("../../../assets/storex_logo.png")} />
           <BodyText>Sign in to your Account</BodyText>
           <Form>
             <Input
@@ -153,7 +142,6 @@ class LoginScreen extends React.Component {
             </View>
           </Form>
           <Loader isLoading={this.props.loading} />
-          <SuccessLoader isSuccessful={this.props.isSuccessful} />
         </Container>
       </TouchableWithoutFeedback>
     );

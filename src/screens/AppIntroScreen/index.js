@@ -70,7 +70,7 @@ const slides = [
     text:
       "You can shop for any product. Just search, add to your cart, and checkout anytime.",
     textStyle: styles.text,
-    image: require("../../assets/empty_cart.png"),
+    image: require("../../../assets/empty_cart.png"),
     imageStyle: styles.image,
     backgroundColor: "#22C0EB"
   },
@@ -78,7 +78,7 @@ const slides = [
     key: "screen2",
     text: "Shopping for your items has never been more convinient. ",
     textStyle: styles.text,
-    image: require("../../assets/shopping.png"),
+    image: require("../../../assets/shopping.png"),
     imageStyle: styles.image,
     backgroundColor: "#20d2bb"
   },
@@ -87,7 +87,7 @@ const slides = [
     textStyle: styles.text,
     text:
       "We deliver aywhere. Enjoy delivery to doorstep in the shortest time possible.",
-    image: require("../../assets/deliveries.png"),
+    image: require("../../../assets/deliveries.png"),
     imageStyle: styles.image,
     backgroundColor: "#22bcb5"
   }

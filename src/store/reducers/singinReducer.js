@@ -10,7 +10,8 @@ const initialState = {
   loading: false,
   isSuccessful: false,
   user: {},
-  error: ""
+  error: "",
+  userToken: ""
 };
 
 const reducer = (state = initialState, action) => {
@@ -22,7 +23,6 @@ const reducer = (state = initialState, action) => {
       };
 
     case SIGNIN_SUCCESS:
-    case SAVE_TOKEN:
       return {
         ...state,
         loading: false,
