@@ -3,11 +3,13 @@ import { Container, Text } from "./styles";
 import Oval from "../../components/Bag";
 
 class BagScreen extends React.Component {
+  static navigationOptions = {
+    header: null
+  };
   render() {
     return (
       <Container>
-        <Text>Men Shopping Screen</Text>
-        <Oval bagCount={3} />
+        <Text>Bag Screen</Text>
       </Container>
     );
   }

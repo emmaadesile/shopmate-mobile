@@ -33,10 +33,14 @@ class ShoppingScreen extends React.Component {
           <Container>
             <NavHeader />
             <TopBanner />
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => this.props.navigation.push("MenShop")}
+            >
               <OutWearHeader title="men" />
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => this.props.navigation.push("WomenShop")}
+            >
               <OutWearHeader title="women" background="#F6966C" />
             </TouchableOpacity>
             <Body>

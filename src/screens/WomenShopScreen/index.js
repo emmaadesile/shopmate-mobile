@@ -1,14 +1,75 @@
 import React from "react";
-import { Container, Text } from "./styles";
+import { connect } from "react-redux";
+import { SafeAreaView, ScrollView, View } from "react-native";
+import getProducts from "../../store/actions/productsAction";
+import { Container } from "./styles";
+import OutwearHeader from "../../components/OutwearHeader";
+import NavHeader from "../../components/NavHeader";
+import LowerNav from "../../components/LowerNav";
+import ProductCard from "../../components/ProductCard";
+import Loading from "../../components/Loading";
 
-class WomenShoppingScreen extends React.Component {
+class MenShoppingScreen extends React.Component {
+  static navigationOptions = {
+    header: null
+  };
+
+  componentDidMount() {
+    const { getAllProducts } = this.props;
+    getAllProducts(2);
+  }
+
+  getDiscountPercent = (discounted_price, price) => {
+    const discountPercent = ((discounted_price - price) / price) * 100;
+    return discountPercent.toFixed(0);
+  };
+
   render() {
+    const { products, loading } = this.props;
+
     return (
       <Container>
-        <Text>Women Shopping Screen</Text>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <SafeAreaView />
+          <NavHeader />
+          <OutwearHeader background="#F6966C" title="women" />
+          <LowerNav type="women" />
+          {loading ? (
+            <Loading />
+          ) : (
+            products.map(
+              ({ product_id, thumbnail, name, price, discounted_price }) => (
+                <ProductCard
+                  key={product_id}
+                  thumbnail={thumbnail}
+                  title={name}
+                  price={price}
+                  discounted_price={discounted_price}
+                  discountPercent={this.getDiscountPercent(
+                    discounted_price,
+                    price
+                  )}
+                />
+              )
+            )
+          )}
+        </ScrollView>
       </Container>
     );
   }
 }
 
-export default WomenShoppingScreen;
+const mapStateToProps = state => ({
+  products: state.products.products,
+  loading: state.products.loading,
+  error: state.products.error
+});
+
+const mapDispatchToProps = dispatch => ({
+  getAllProducts: page => dispatch(getProducts(page))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MenShoppingScreen);
