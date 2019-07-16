@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { SafeAreaView, ScrollView, View } from "react-native";
+import { SafeAreaView, ScrollView } from "react-native";
 import getProducts from "../../store/actions/productsAction";
 import { Container } from "./styles";
 import OutwearHeader from "../../components/OutwearHeader";
@@ -8,6 +8,7 @@ import NavHeader from "../../components/NavHeader";
 import LowerNav from "../../components/LowerNav";
 import ProductCard from "../../components/ProductCard";
 import Loading from "../../components/Loading";
+import colors from "../../globals/colors";
 
 class MenShoppingScreen extends React.Component {
   static navigationOptions = {
@@ -16,12 +17,30 @@ class MenShoppingScreen extends React.Component {
 
   componentDidMount() {
     const { getAllProducts } = this.props;
-    getAllProducts(2);
+    getAllProducts();
   }
 
   getDiscountPercent = (discounted_price, price) => {
     const discountPercent = ((discounted_price - price) / price) * 100;
     return discountPercent.toFixed(0);
+  };
+
+  calculateBackground = id => {
+    if (id % 2 === 0) {
+      return colors.yellow;
+    }
+    if (id % 2 !== 0) {
+      return colors.green;
+    }
+  };
+
+  calculateType = id => {
+    if (id % 2 === 0) {
+      return "new";
+    }
+    if (id % 2 !== 0) {
+      return "sale";
+    }
   };
 
   render() {
@@ -32,7 +51,7 @@ class MenShoppingScreen extends React.Component {
         <ScrollView showsVerticalScrollIndicator={false}>
           <SafeAreaView />
           <NavHeader />
-          <OutwearHeader background="#F6966C" title="women" />
+          <OutwearHeader title="women" background={colors.pink} />
           <LowerNav type="women" />
           {loading ? (
             <Loading />
@@ -41,9 +60,12 @@ class MenShoppingScreen extends React.Component {
               ({ product_id, thumbnail, name, price, discounted_price }) => (
                 <ProductCard
                   key={product_id}
+                  product_id={product_id}
                   thumbnail={thumbnail}
                   title={name}
                   price={price}
+                  background={this.calculateBackground(product_id)}
+                  type={this.calculateType(product_id)}
                   discounted_price={discounted_price}
                   discountPercent={this.getDiscountPercent(
                     discounted_price,
@@ -66,7 +88,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  getAllProducts: page => dispatch(getProducts(page))
+  getAllProducts: () => dispatch(getProducts())
 });
 
 export default connect(

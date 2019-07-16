@@ -7,7 +7,9 @@ const Product = ({
   title,
   price,
   discounted_price,
-  discountPercent
+  discountPercent,
+  background,
+  type
 }) => {
   return (
     <Container>
@@ -21,12 +23,13 @@ const Product = ({
           <DiscountedPrice>${discounted_price}</DiscountedPrice>
         </Price>
       </ProductDetails>
-      <DiscountPercent>{discountPercent}%</DiscountPercent>
+      <Wrapper>
+        <DiscountPercent>{discountPercent}%</DiscountPercent>
+        <ProductType background={background}>{type}</ProductType>
+      </Wrapper>
     </Container>
   );
 };
-
-// const discountPercent =
 
 const Container = styled.View`
   width: 100%;
@@ -78,16 +81,29 @@ const Title = styled.Text`
 `;
 
 const DiscountPercent = styled.Text`
-  position: absolute;
-  bottom: 0;
-  right: 0;
   text-transform: uppercase;
   font-family: sourceSansProBold;
   font-size: 17px;
-  align-self: flex-end;
   background: #666666;
   padding: 5px 13px;
   color: #fff;
+`;
+
+const ProductType = styled.Text`
+  text-transform: uppercase;
+  font-family: sourceSansProBold;
+  font-size: 17px;
+  background: ${props => props.background || "#ddd"};
+  padding: 5px 13px;
+  color: #fff;
+`;
+
+const Wrapper = styled.View`
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  align-self: flex-end;
+  flex-direction: row;
 `;
 
 export default Product;
