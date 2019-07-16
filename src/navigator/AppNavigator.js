@@ -6,8 +6,8 @@ import {
 import SignupScreen from "../screens/SignupScreen";
 import LoginScreen from "../screens/LoginScreen";
 import AppIntroScreen from "../screens/AppIntroScreen";
-import ShoppingScreen from "../screens/ShoppingScreen";
 import AuthLoadingScreen from "../screens/AuthLoadingScreen";
+import TabNavigator from "../navigator/TabNavigator";
 
 const AuthStack = createStackNavigator({
   Login: LoginScreen,
@@ -18,17 +18,13 @@ const AppIntroStack = createStackNavigator({
   AppIntro: AppIntroScreen
 });
 
-const AppStack = createStackNavigator({
-  Shop: ShoppingScreen
-});
-
 const App = createAppContainer(
   createSwitchNavigator(
     {
       AuthLoading: AuthLoadingScreen,
       AppIntro: AppIntroStack,
       Auth: AuthStack,
-      App: AppStack
+      App: TabNavigator
     },
     {
       initialRouteName: "AuthLoading"

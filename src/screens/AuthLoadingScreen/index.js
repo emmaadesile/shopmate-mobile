@@ -1,9 +1,8 @@
 import React from "react";
 import { AsyncStorage } from "react-native";
-import { connect } from "react-redux";
+import { Font } from "expo";
 import Loader from "../../components/Loader";
 import { Container } from "./styles";
-import { getUserToken } from "../../store/actions/authAction";
 
 class AuthLoadingScreen extends React.Component {
   constructor(props) {
@@ -20,6 +19,7 @@ class AuthLoadingScreen extends React.Component {
 
     try {
       const isFirstTimeAccessingApp = await AsyncStorage.getItem("first_time");
+      const userToken = await AsyncStorage.getItem("userToken");
 
       if (isFirstTimeAccessingApp === null) {
         this.setState = { loading: false };
@@ -27,9 +27,8 @@ class AuthLoadingScreen extends React.Component {
       }
 
       this.setState = { loading: false };
-      await this.props.getUserToken();
 
-      navigate(this.props.userToken ? "App" : "Auth");
+      navigate(userToken ? "App" : "Auth");
     } catch (error) {
       console.log(error);
     }
@@ -43,15 +42,4 @@ class AuthLoadingScreen extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  userToken: state.userToken
-});
-
-const mapDispatchToProps = dispatch => ({
-  getUserToken: () => dispatch(getUserToken())
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(AuthLoadingScreen);
+export default AuthLoadingScreen;

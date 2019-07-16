@@ -1,6 +1,6 @@
 import axios from "axios";
 import { BASEURL } from "react-native-dotenv";
-import { saveUserToken, getUserToken, removeUserToken } from "./authAction";
+import { saveUserToken } from "./authAction";
 
 export const SIGNIN_LOADING = "SIGNIN_LOADING";
 export const SIGNIN_SUCCESS = "SIGNIN_SUCCESS";
@@ -35,7 +35,7 @@ const signin = (email, password) => dispatch => {
         dispatch(signinSuccess(response.data.customer));
 
         const userToken = response.data.accessToken;
-        dispatch(saveUserToken("userToken", userToken));
+        saveUserToken("userToken", userToken);
       }
     })
     .catch(error => {

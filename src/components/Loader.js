@@ -51,7 +51,7 @@ class Loader extends React.Component {
         }}
       >
         <Lottie
-          source={require("../assets/loading-1.json")}
+          source={require("../../assets/loading.json")}
           autoPlay={false}
           loop
           ref={animation => (this.animation = animation)}
@@ -70,6 +70,7 @@ const Container = styled.View`
   background: rgba(255, 255, 255, 0.9);
   align-items: center;
   justify-content: center;
+  z-index: -1;
 `;
 
 const AnimatedContainer = Animated.createAnimatedComponent(Container);
