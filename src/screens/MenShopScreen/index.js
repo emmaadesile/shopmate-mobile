@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { SafeAreaView, ScrollView } from "react-native";
+import { ScrollView } from "react-native";
 import getProducts from "../../store/actions/productsAction";
 import { Container } from "./styles";
 import OutwearHeader from "../../components/OutwearHeader";
@@ -9,6 +9,7 @@ import LowerNav from "../../components/LowerNav";
 import ProductCard from "../../components/ProductCard";
 import Loading from "../../components/Loading";
 import colors from "../../globals/colors";
+import navActions from "../../store/actions/navAction";
 
 class MenShoppingScreen extends React.Component {
   static navigationOptions = {
@@ -49,8 +50,7 @@ class MenShoppingScreen extends React.Component {
     return (
       <Container>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <SafeAreaView />
-          <NavHeader />
+          <NavHeader toggleMenu={this.props.toggleMenu} />
           <OutwearHeader title="men" />
           <LowerNav type="men" />
           {loading ? (
@@ -88,7 +88,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  getAllProducts: () => dispatch(getProducts())
+  getAllProducts: () => dispatch(getProducts()),
+  toggleMenu: () => dispatch(navActions())
 });
 
 export default connect(

@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { SafeAreaView, ScrollView } from "react-native";
+import { ScrollView } from "react-native";
 import getProducts from "../../store/actions/productsAction";
 import { Container } from "./styles";
 import OutwearHeader from "../../components/OutwearHeader";
@@ -9,6 +9,7 @@ import LowerNav from "../../components/LowerNav";
 import ProductCard from "../../components/ProductCard";
 import Loading from "../../components/Loading";
 import colors from "../../globals/colors";
+import navActions from "../../store/actions/navAction";
 
 class MenShoppingScreen extends React.Component {
   static navigationOptions = {
@@ -17,7 +18,7 @@ class MenShoppingScreen extends React.Component {
 
   componentDidMount() {
     const { getAllProducts } = this.props;
-    getAllProducts();
+    getAllProducts(2);
   }
 
   getDiscountPercent = (discounted_price, price) => {
@@ -43,14 +44,23 @@ class MenShoppingScreen extends React.Component {
     }
   };
 
+  toggleMenu = () => {
+    const { dispatch } = this.props;
+    if (!this.props.openMenu) {
+      dispatch(navActions(true));
+    }
+    if (this.props.openMenu) {
+      dispatch(navActions(false));
+    }
+  };
+
   render() {
     const { products, loading } = this.props;
 
     return (
       <Container>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <SafeAreaView />
-          <NavHeader />
+          <NavHeader toggleMenu={this.toggleMenu} />
           <OutwearHeader title="women" background={colors.pink} />
           <LowerNav type="women" />
           {loading ? (
@@ -88,7 +98,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  getAllProducts: () => dispatch(getProducts())
+  getAllProducts: page => dispatch(getProducts(page)),
+  toggleMenu: openMenu => dispatch(navActions(openMenu))
 });
 
 export default connect(

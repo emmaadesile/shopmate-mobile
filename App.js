@@ -1,8 +1,8 @@
 import React from "react";
-import AppNavigator from "./src/navigator/AppNavigator";
 import { Provider } from "react-redux";
-import store from "./src/store";
 import * as Font from "expo-font";
+import store from "./src/store";
+import AppContainer from "./src";
 
 export default class App extends React.Component {
   state = {
@@ -25,7 +25,7 @@ export default class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        {this.state.fontLoaded ? <AppNavigator /> : null}
+        {this.state.fontLoaded ? <AppContainer /> : null}
       </Provider>
     );
   }

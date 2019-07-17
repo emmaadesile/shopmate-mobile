@@ -3,7 +3,7 @@ import Svg, { G, Path, Ellipse } from "react-native-svg";
 /* SVGR has dropped some elements not supported by react-native-svg: title */
 
 const ShoppingBag = props => (
-  <Svg width={36} height={38} {...props}>
+  <Svg width={props.width || "36"} height={props.height || "38"} {...props}>
     <G fill="none" fillRule="evenodd">
       <Path
         d="M5.111 12.53L2.045 34.242c-.183 1.296.65 2.258 1.945 2.258h28.02c1.29 0 2.127-.967 1.945-2.258L30.889 12.53c-.206-1.458-1.61-2.677-3.078-2.677H8.19c-1.464 0-2.873 1.226-3.078 2.677z"

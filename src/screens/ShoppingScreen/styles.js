@@ -1,9 +1,20 @@
 import styled from "styled-components";
+import { Dimensions } from "react-native";
+
+const screenHeight = Dimensions.get("window").height;
 
 const Container = styled.View`
   width: 100%;
   height: 100%;
 `;
+
+// const Overlay = styled.View`
+//   width: 100%;
+//   height: ${screenHeight};
+//   position: absolute;
+//   z-index: 10;
+//   background: rgba(0, 0, 0, 0.6);
+// `;
 
 const Body = styled.View`
   justify-content: center;
