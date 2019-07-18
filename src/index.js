@@ -1,5 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
 import AppNavigator from "./navigator/AppNavigator";
 import MainNavigation from "./components/MainNavigation";
 
