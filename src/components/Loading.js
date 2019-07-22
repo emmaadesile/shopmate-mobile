@@ -10,7 +10,7 @@ const Loading = () => (
 
 const Container = styled.View`
   width: 100%;
-  height: 500px;
+  height: 480px;
 `;
 
 export default Loading;

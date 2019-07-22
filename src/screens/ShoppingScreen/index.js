@@ -5,7 +5,6 @@ import {
   ScrollView,
   TouchableOpacity
 } from "react-native";
-import { connect } from "react-redux";
 import NavHeader from "../../components/NavHeader";
 import TopBanner from "../../components/TopBanner";
 import OutWearHeader from "../../components/OutwearHeader";
@@ -19,6 +18,7 @@ import {
   ShopButton,
   ButtonText
 } from "./styles";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 class ShoppingScreen extends React.Component {
   static navigationOptions = {
@@ -33,16 +33,16 @@ class ShoppingScreen extends React.Component {
           <Container>
             <NavHeader />
             <TopBanner />
-            <TouchableOpacity
+            <TouchableWithoutFeedback
               onPress={() => this.props.navigation.push("MenShop")}
             >
               <OutWearHeader title="men" />
-            </TouchableOpacity>
-            <TouchableOpacity
+            </TouchableWithoutFeedback>
+            <TouchableWithoutFeedback
               onPress={() => this.props.navigation.push("WomenShop")}
             >
               <OutWearHeader title="women" background="#F6966C" />
-            </TouchableOpacity>
+            </TouchableWithoutFeedback>
             <Body>
               <BodyText>winter sale</BodyText>
               <SubText>up to 60% off</SubText>

@@ -11,6 +11,7 @@ import WomenShopScreen from "../screens/WomenShopScreen";
 import MoreScreen from "../screens/MoreScreen";
 import BagScreen from "../screens/BagScreen";
 import * as Icon from "@expo/vector-icons";
+import ProductDetailsScreen from "../screens/ProductDetailScreen";
 import ShopIcon from "../components/ShopIcon";
 import InspirationIcon from "../components/InspirationIcon";
 import StoresIcon from "../components/StoresIcon";
@@ -30,19 +31,30 @@ const tabBarOptions = {
 const ShoppingStack = createStackNavigator({
   Shop: ShoppingScreen,
   MenShop: MenShopScreen,
-  WomenShop: WomenShopScreen
+  WomenShop: WomenShopScreen,
+  Product: ProductDetailsScreen
 });
 
-ShoppingStack.navigationOptions = {
-  tabBarLabel: "Shop",
-  tabBarOptions,
-  // eslint-disable-next-line react/display-name
-  tabBarIcon: ({ focused }) => (
-    <ShopIcon
-      strokeColor={focused ? colors.activeColor : colors.inActiveColor}
-      fillColor={focused ? colors.activeColor : "#fff"}
-    />
-  )
+ShoppingStack.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true;
+  const routeName = navigation.state.routes[navigation.state.index].routeName;
+
+  if (routeName === "Product") {
+    tabBarVisible = false;
+  }
+
+  return {
+    tabBarVisible,
+    tabBarLabel: "Shop",
+    tabBarOptions,
+    // eslint-disable-next-line react/display-name
+    tabBarIcon: ({ focused }) => (
+      <ShopIcon
+        strokeColor={focused ? colors.activeColor : colors.inActiveColor}
+        fillColor={focused ? colors.activeColor : "#fff"}
+      />
+    )
+  };
 };
 
 const InspirationStack = createStackNavigator({

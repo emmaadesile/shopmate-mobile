@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { SafeAreaView, ScrollView } from "react-native";
+import { SafeAreaView, ScrollView, TouchableOpacity } from "react-native";
 import getProducts from "../../store/actions/productsAction";
 import { Container } from "./styles";
 import OutwearHeader from "../../components/OutwearHeader";
@@ -58,20 +58,28 @@ class MenShoppingScreen extends React.Component {
           ) : (
             products.map(
               ({ product_id, thumbnail, name, price, discounted_price }) => (
-                <ProductCard
+                <TouchableOpacity
                   key={product_id}
-                  product_id={product_id}
-                  thumbnail={thumbnail}
-                  title={name}
-                  price={price}
-                  background={this.calculateBackground(product_id)}
-                  type={this.calculateType(product_id)}
-                  discounted_price={discounted_price}
-                  discountPercent={this.getDiscountPercent(
-                    discounted_price,
-                    price
-                  )}
-                />
+                  onPress={() =>
+                    this.props.navigation.push("Product", {
+                      productId: product_id
+                    })
+                  }
+                >
+                  <ProductCard
+                    product_id={product_id}
+                    thumbnail={thumbnail}
+                    title={name}
+                    price={price}
+                    background={this.calculateBackground(product_id)}
+                    type={this.calculateType(product_id)}
+                    discounted_price={discounted_price}
+                    discountPercent={this.getDiscountPercent(
+                      discounted_price,
+                      price
+                    )}
+                  />
+                </TouchableOpacity>
               )
             )
           )}
