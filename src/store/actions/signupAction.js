@@ -36,7 +36,7 @@ const signup = (name, email, password) => dispatch => {
       }
     })
     .catch(error => {
-      dispatch(signupError(error.message));
+      dispatch(signupError(error.message || "Error occured while signing up"));
     });
 };
 

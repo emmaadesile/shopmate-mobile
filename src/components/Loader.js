@@ -70,7 +70,7 @@ const Container = styled.View`
   background: rgba(255, 255, 255, 0.9);
   align-items: center;
   justify-content: center;
-  z-index: -1;
+  z-index: 100;
 `;
 
 const AnimatedContainer = Animated.createAnimatedComponent(Container);
