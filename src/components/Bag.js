@@ -1,14 +1,14 @@
 import React from "react";
 import styled from "styled-components";
+import { connect } from "react-redux";
 import { LinearGradient } from "expo-linear-gradient";
+import getProductsInShoppingCart from "../store/actions/getProductsInshoppingCartAction";
 import ShoppingBag from "./ShoppingBag";
 
 class Bag extends React.Component {
-  state = {
-    bagCount: 0
-  };
   render() {
-    const { bagCount } = this.state;
+    const { products } = this.props;
+    const productsCount = products.length;
     return (
       <Container>
         <LinearGradient
@@ -29,9 +29,9 @@ class Bag extends React.Component {
           innerStrokeColor={this.props.innerStrokeColor}
           innerFillColor={this.props.innerFillColor}
         />
-        {bagCount > 0 ? (
+        {productsCount > 0 ? (
           <BagContainer>
-            <BagCount>{bagCount}</BagCount>
+            <BagCount>{productsCount}</BagCount>
           </BagContainer>
         ) : null}
       </Container>
@@ -66,8 +66,8 @@ const BagContainer = styled.View`
   height: 20px;
   border-radius: 10px;
   position: absolute;
-  top: 35px;
-  right: 25px;
+  top: 30px;
+  right: 20px;
 `;
 
 const BagCount = styled.Text`
@@ -75,4 +75,15 @@ const BagCount = styled.Text`
   color: #fff;
 `;
 
-export default Bag;
+const mapStateToProps = state => ({
+  products: state.getProductsInShoppingCart.products
+});
+
+const mapDispatchToProps = dispatch => ({
+  getProductsInShoppingCart: () => dispatch(getProductsInShoppingCart())
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Bag);

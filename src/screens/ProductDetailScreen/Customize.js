@@ -37,7 +37,68 @@ class Customize extends React.Component {
 
   render() {
     const { sizeIndex, colorIndex } = this.state;
-    return (
+    const { screen } = this.props;
+
+    return screen === "editProduct" ? (
+      <AnimatedContainerTwo>
+        <Wrapper>
+          <Label>size</Label>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center"
+            }}
+          >
+            {productSizes.map((size, index) => (
+              <TouchableOpacity
+                key={index}
+                onPress={() => this.setState({ sizeIndex: index })}
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "center"
+                }}
+              >
+                <Hexagon
+                  strokeColor={sizeIndex === index && colors.yellow}
+                  fillColor={sizeIndex === index && colors.yellow}
+                  color={sizeIndex === index && colors.white}
+                  size={size}
+                />
+              </TouchableOpacity>
+            ))}
+          </View>
+        </Wrapper>
+        <Wrapper>
+          <Label>colour</Label>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center"
+            }}
+          >
+            {productColors.map((color, index) => (
+              <TouchableOpacity
+                key={index}
+                onPress={() => this.setState({ colorIndex: index })}
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "center"
+                }}
+              >
+                <SmallHexagon
+                  fillColor={color}
+                  strokeColor={colorIndex === index && color}
+                />
+              </TouchableOpacity>
+            ))}
+          </View>
+        </Wrapper>
+      </AnimatedContainerTwo>
+    ) : (
       <AnimatedContainer
         style={{
           bottom: this.state.bottom,
@@ -117,7 +178,15 @@ const Container = styled.View`
   bottom: 82px;
 `;
 
+const ContainerTwo = styled.View`
+  height: 280px;
+  width: 100%;
+  padding: 20px 15px;
+  background: rgba(255, 255, 255, 0.9);
+`;
+
 const AnimatedContainer = Animated.createAnimatedComponent(Container);
+const AnimatedContainerTwo = Animated.createAnimatedComponent(ContainerTwo);
 
 const Wrapper = styled.View`
   margin-bottom: 30px;

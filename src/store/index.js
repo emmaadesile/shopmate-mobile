@@ -4,12 +4,16 @@ import signup from "./reducers/signupReducer";
 import signin from "./reducers/singinReducer";
 import products from "./reducers/productsReducer";
 import productDetails from "./reducers/productDetailsReducer";
+import addProductsToShoppingCart from "./reducers/addProductsToShoppingCartReducer";
+import getProductsInShoppingCart from "./reducers/getProductsInShoppingCartReducer";
 
 const rootReducer = combineReducers({
   signup,
   signin,
   products,
-  productDetails
+  productDetails,
+  addProductsToShoppingCart,
+  getProductsInShoppingCart
 });
 
 const middleware = applyMiddleware(thunk);

@@ -3,6 +3,7 @@ import {
   createBottomTabNavigator,
   createStackNavigator
 } from "react-navigation";
+import * as Icon from "@expo/vector-icons";
 import InspirationScreen from "../screens/InspirationScreen";
 import StoresScreen from "../screens/StoresScreen";
 import ShoppingScreen from "../screens/ShoppingScreen";
@@ -10,8 +11,8 @@ import MenShopScreen from "../screens/MenShopScreen";
 import WomenShopScreen from "../screens/WomenShopScreen";
 import MoreScreen from "../screens/MoreScreen";
 import BagScreen from "../screens/BagScreen";
-import * as Icon from "@expo/vector-icons";
 import ProductDetailsScreen from "../screens/ProductDetailScreen";
+import EditShoppingCartScreen from "../screens/EditShoppingCartScreen";
 import ShopIcon from "../components/ShopIcon";
 import InspirationIcon from "../components/InspirationIcon";
 import StoresIcon from "../components/StoresIcon";
@@ -104,7 +105,8 @@ MoreStack.navigationOptions = {
 };
 
 const BagStack = createStackNavigator({
-  Bag: BagScreen
+  Bag: BagScreen,
+  EditProduct: EditShoppingCartScreen
 });
 
 BagStack.navigationOptions = {
