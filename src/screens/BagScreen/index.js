@@ -1,5 +1,5 @@
 import React from "react";
-import { SafeAreaView, View, TouchableOpacity } from "react-native";
+import { SafeAreaView, View, TouchableOpacity, ScrollView } from "react-native";
 import { connect } from "react-redux";
 import getProductsInshoppingCart from "../../store/actions/getProductsInshoppingCartAction";
 import Loading from "../../components/Loading";
@@ -66,8 +66,8 @@ class BagScreen extends React.Component {
   };
 
   shortenProductName = name => {
-    if (name.length > 13) {
-      return `${name.substr(0, 13)}...`;
+    if (name.length > 15) {
+      return `${name.substr(0, 15)}...`;
     }
 
     return name;
@@ -88,83 +88,85 @@ class BagScreen extends React.Component {
         ) : products.length === 0 ? (
           this.renderEmptyCart()
         ) : (
-          <Container>
-            <TopSection>
-              <TopText>
-                You have
-                <SubText> {this.calculateNoOfItems()} items </SubText>
-                in your shopping bag.
-              </TopText>
-              <CheckoutButton>
-                <CheckoutButtonText>checkout</CheckoutButtonText>
-              </CheckoutButton>
-            </TopSection>
-            <ProductWrapper>
-              <Divider />
-              {products.map(product => (
-                <React.Fragment key={product.item_id}>
-                  <Product>
-                    <Image />
-                    <View>
-                      <ProductName>
-                        {this.shortenProductName(product.name)}
-                      </ProductName>
-                      <View style={{ flexDirection: "row" }}>
-                        <OriginalPrice>$11.00</OriginalPrice>
-                        <DiscountedPrice>${product.price}</DiscountedPrice>
-                      </View>
-                    </View>
-                    <TouchableOpacity
-                      onPress={() =>
-                        this.props.navigation.push("EditProduct", {
-                          name: product.name,
-                          price: product.price,
-                          quantity: product.quantity
-                        })
-                      }
-                    >
+          <ScrollView>
+            <Container>
+              <TopSection>
+                <TopText>
+                  You have
+                  <SubText> {this.calculateNoOfItems()} items </SubText>
+                  in your shopping bag.
+                </TopText>
+                <CheckoutButton>
+                  <CheckoutButtonText>checkout</CheckoutButtonText>
+                </CheckoutButton>
+              </TopSection>
+              <ProductWrapper>
+                <Divider />
+                {products.map(product => (
+                  <React.Fragment key={product.item_id}>
+                    <Product>
+                      <Image />
                       <View>
-                        <EditIcon
-                          source={require("../../../assets/editIcon.jpg")}
-                        />
+                        <ProductName>
+                          {this.shortenProductName(product.name)}
+                        </ProductName>
+                        <View style={{ flexDirection: "row" }}>
+                          <OriginalPrice>$11.00</OriginalPrice>
+                          <DiscountedPrice>${product.price}</DiscountedPrice>
+                        </View>
                       </View>
-                    </TouchableOpacity>
-                  </Product>
-                  <Divider />
-                </React.Fragment>
-              ))}
-            </ProductWrapper>
-            <TotalSection>
-              <FirstSection>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between"
-                  }}
-                >
-                  <Subtitle>Subtotal</Subtitle>
-                  <SubTotal>${this.calculateSubTotal()}</SubTotal>
-                </View>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    marginTop: 10
-                  }}
-                >
-                  <Subtitle>Shipping</Subtitle>
-                  <SubTotal>$10</SubTotal>
-                </View>
-              </FirstSection>
-              <Divider />
-              <BottomSection>
-                <Subtitle fontSize="25px" color="#454545">
-                  Total
-                </Subtitle>
-                <TotalPrice> ${this.calculateTotalPrice()} </TotalPrice>
-              </BottomSection>
-            </TotalSection>
-          </Container>
+                      <TouchableOpacity
+                        onPress={() =>
+                          this.props.navigation.push("EditProduct", {
+                            name: product.name,
+                            price: product.price,
+                            quantity: product.quantity
+                          })
+                        }
+                      >
+                        <View>
+                          <EditIcon
+                            source={require("../../../assets/editIcon.jpg")}
+                          />
+                        </View>
+                      </TouchableOpacity>
+                    </Product>
+                    <Divider />
+                  </React.Fragment>
+                ))}
+              </ProductWrapper>
+              <TotalSection>
+                <FirstSection>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "space-between"
+                    }}
+                  >
+                    <Subtitle>Subtotal</Subtitle>
+                    <SubTotal>${this.calculateSubTotal()}</SubTotal>
+                  </View>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      marginTop: 10
+                    }}
+                  >
+                    <Subtitle>Shipping</Subtitle>
+                    <SubTotal>$10</SubTotal>
+                  </View>
+                </FirstSection>
+                <Divider />
+                <BottomSection>
+                  <Subtitle fontSize="25px" color="#454545">
+                    Total
+                  </Subtitle>
+                  <TotalPrice> ${this.calculateTotalPrice()} </TotalPrice>
+                </BottomSection>
+              </TotalSection>
+            </Container>
+          </ScrollView>
         )}
       </SafeAreaView>
     );

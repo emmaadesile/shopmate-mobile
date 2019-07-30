@@ -11,7 +11,6 @@ import {
   Product,
   ProductName,
   DiscountedPrice,
-  OriginalPrice,
   DoneWrapper,
   DoneButton,
   DoneButtonText
@@ -74,10 +73,7 @@ class EditShoppingCartScreen extends React.Component {
             <Image />
             <View>
               <ProductName>{name}</ProductName>
-              <View style={{ flexDirection: "row" }}>
-                <OriginalPrice>$11.00</OriginalPrice>
-                <DiscountedPrice>${price}</DiscountedPrice>
-              </View>
+              <DiscountedPrice>${price}</DiscountedPrice>
             </View>
             <TouchableOpacity onPress={() => this.showAlert()}>
               <Icon.Ionicons name="ios-close" size={35} color="#999999" />

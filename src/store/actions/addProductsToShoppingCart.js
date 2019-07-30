@@ -1,4 +1,5 @@
 import axios from "axios";
+import { showMessage } from "react-native-flash-message";
 import { BASEURL, CART_ID } from "react-native-dotenv";
 
 export const ADD_PRODUCT_TO_CART_LOADING = "ADD_PRODUCT_TO_CART_LOADING";
@@ -10,9 +11,9 @@ const addProductToCartLoading = loading => ({
   payload: loading
 });
 
-const addProductToCartSuccess = products => ({
+const addProductToCartSuccess = (products, message) => ({
   type: ADD_PRODUCT_TO_CART_SUCCESS,
-  payload: products
+  payload: { products: products, messsage: message }
 });
 
 const addProductToCartError = error => ({
@@ -32,8 +33,18 @@ const addProductToCart = productId => dispatch => {
     .then(response => {
       dispatch(addProductToCartLoading(false));
 
-      if (response.statues === 200) {
-        dispatch(addProductToCartSuccess(response.data));
+      if (response.status === 200) {
+        dispatch(
+          addProductToCartSuccess({
+            products: response.data,
+            message: "Item was successfully added to the cart"
+          })
+        );
+        showMessage({
+          message: "Item was successfully added to the cart",
+          type: "success",
+          animationDuration: 500
+        });
       }
     })
     .catch(error => {
