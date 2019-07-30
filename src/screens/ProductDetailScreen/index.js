@@ -2,9 +2,9 @@ import React from "react";
 import { View } from "react-native";
 import * as Icon from "@expo/vector-icons";
 import { connect } from "react-redux";
-import { SafeAreaView } from "react-navigation";
+import { SafeAreaView } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-
+import addProductToCart from "../../store/actions/addProductsToShoppingCart";
 import getProductDetails from "../../store/actions/productDetailsAction";
 import { BASEURL } from "react-native-dotenv";
 import Loading from "../../components/Loading";
@@ -33,7 +33,8 @@ class ProductDetails extends React.Component {
   };
 
   state = {
-    isCustomizePopupOpen: false
+    isCustomizePopupOpen: false,
+    messageActive: false
   };
 
   componentDidMount() {
@@ -44,8 +45,10 @@ class ProductDetails extends React.Component {
   }
 
   render() {
-    const { productDetails, loading } = this.props;
+    const { productDetails, loading, cartLoading } = this.props;
+
     const {
+      product_id,
       name,
       description,
       price,
@@ -107,9 +110,17 @@ class ProductDetails extends React.Component {
                   <Price>${price}</Price>
                   <DiscountPrice>${discounted_price}</DiscountPrice>
                 </View>
-                <CartButton>
-                  <CartText>add to cart</CartText>
-                </CartButton>
+                <TouchableOpacity
+                  onPress={() => this.props.addProductToCart(product_id)}
+                >
+                  <CartButton>
+                    {cartLoading ? (
+                      <Loading />
+                    ) : (
+                      <CartText>add to cart</CartText>
+                    )}
+                  </CartButton>
+                </TouchableOpacity>
               </CartSection>
             </BottomSection>
             <Customize isCustomizePopupOpen={this.state.isCustomizePopupOpen} />
@@ -123,11 +134,15 @@ class ProductDetails extends React.Component {
 const mapStateToProps = state => ({
   productDetails: state.productDetails.product,
   loading: state.productDetails.loading,
-  error: state.productDetails.error
+  error: state.productDetails.error,
+
+  productsInCart: state.addProductsToShoppingCart.products.products,
+  cartLoading: state.addProductsToShoppingCart.loading
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchProductDetails: productId => dispatch(getProductDetails(productId))
+  fetchProductDetails: productId => dispatch(getProductDetails(productId)),
+  addProductToCart: productId => dispatch(addProductToCart(productId))
 });
 
 export default connect(

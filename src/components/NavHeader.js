@@ -21,6 +21,7 @@ export default NavHeader;
 const Container = styled.View`
   width: 100%;
   height: 50px;
+  /* background: ${props => props.background || "#fff"}; */
 `;
 
 const Logo = styled.Image`
