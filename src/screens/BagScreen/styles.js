@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 const Container = styled.View`
   width: 100%;
-  min-height: 100%;
+  min-height: 1000px;
+  max-height: 3000px;
 `;
 
 const EmptyContainer = styled.View`

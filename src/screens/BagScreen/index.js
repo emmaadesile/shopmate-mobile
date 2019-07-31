@@ -1,5 +1,6 @@
 import React from "react";
 import { SafeAreaView, View, TouchableOpacity, ScrollView } from "react-native";
+import { StackActions, NavigationActions } from "react-navigation";
 import { connect } from "react-redux";
 import getProductsInshoppingCart from "../../store/actions/getProductsInshoppingCartAction";
 import Loading from "../../components/Loading";
@@ -36,12 +37,23 @@ class BagScreen extends React.Component {
     header: null
   };
 
-  state = {};
-
   componentDidMount() {
     const { getProductsInshoppingCart } = this.props;
     getProductsInshoppingCart();
   }
+
+  // componentDidUpdate() {
+  // const { getProductsInshoppingCart, deleteItemSuccess } = this.props;
+  // if (deleteItemSuccess) {
+  //   return getProductsInshoppingCart();
+  // }
+
+  //   const resetAction = StackActions.reset({
+  //     index: 0,
+  //     actions: [NavigationActions.navigate({ routeName: "Bag" })]
+  //   });
+  //   this.props.navigation.dispatch(resetAction);
+  // }
 
   renderEmptyCart = () => (
     <EmptyContainer>
@@ -78,7 +90,7 @@ class BagScreen extends React.Component {
   };
 
   render() {
-    const { products, loading, error } = this.props;
+    const { products, loading } = this.props;
 
     return (
       <SafeAreaView>
@@ -120,7 +132,8 @@ class BagScreen extends React.Component {
                           this.props.navigation.push("EditProduct", {
                             name: product.name,
                             price: product.price,
-                            quantity: product.quantity
+                            quantity: product.quantity,
+                            itemId: product.item_id
                           })
                         }
                       >
@@ -176,7 +189,9 @@ class BagScreen extends React.Component {
 const mapStateToProps = state => ({
   loading: state.getProductsInShoppingCart.loading,
   products: state.getProductsInShoppingCart.products,
-  error: state.getProductsInShoppingCart.error
+  error: state.getProductsInShoppingCart.error,
+
+  deleteItemSuccess: state.deleteItemFromCart.message
 });
 
 const mapDispatchToProps = dispatch => ({

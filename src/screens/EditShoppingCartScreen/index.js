@@ -1,7 +1,11 @@
 import React from "react";
 import { SafeAreaView, View, TouchableOpacity, Alert } from "react-native";
+import { connect } from "react-redux";
+import deleteItemFromCart from "../../store/actions/deleteItemFromCart";
+import getProductsInShoppingCart from "../../store/actions/getProductsInshoppingCartAction";
 import * as Icon from "@expo/vector-icons";
 import Customize from "../ProductDetailScreen/Customize";
+import Loading from "../../components/Loading";
 import Rhombus from "../../components/Rhombus";
 import {
   Container,
@@ -25,31 +29,46 @@ class EditShoppingCartScreen extends React.Component {
   state = {
     name: "",
     price: "",
-    quantity: ""
+    quantity: "",
+    producId: "",
+    itemId: "",
+    reloadCart: false
   };
 
   componentDidMount() {
     const name = this.props.navigation.getParam("name");
     const price = this.props.navigation.getParam("price");
     const quantity = this.props.navigation.getParam("quantity");
+    const itemId = this.props.navigation.getParam("itemId");
 
-    this.setState({ name, price, quantity });
+    this.setState({ name, price, quantity, itemId });
   }
 
   showAlert = () => {
+    const { deleteItem } = this.props;
+    const { itemId } = this.state;
+
     Alert.alert(
       "Delete Product",
       "Are you sure you want to delete this product?",
       [
         { text: "No", onPress: () => null },
-        { text: "Yes", onPress: () => null }
+        {
+          text: "Yes",
+          onPress: () => {
+            deleteItem(itemId);
+
+            this.props.navigation.navigate("Bag");
+          }
+        }
       ],
       { cancelable: true }
     );
   };
 
   render() {
-    const { name, price, quantity } = this.state;
+    const { name, price } = this.state;
+    const { deleteItemLoading } = this.props;
 
     return (
       <SafeAreaView>
@@ -71,10 +90,14 @@ class EditShoppingCartScreen extends React.Component {
           </View>
           <Product>
             <Image />
-            <View>
-              <ProductName>{name}</ProductName>
-              <DiscountedPrice>${price}</DiscountedPrice>
-            </View>
+            {deleteItemLoading ? (
+              <Loading />
+            ) : (
+              <View>
+                <ProductName>{name}</ProductName>
+                <DiscountedPrice>${price}</DiscountedPrice>
+              </View>
+            )}
             <TouchableOpacity onPress={() => this.showAlert()}>
               <Icon.Ionicons name="ios-close" size={35} color="#999999" />
             </TouchableOpacity>
@@ -93,4 +116,17 @@ class EditShoppingCartScreen extends React.Component {
   }
 }
 
-export default EditShoppingCartScreen;
+const mapStateToPtops = state => ({
+  deleteItemLoading: state.deleteItemFromCart.loading,
+  deteleProductMessage: state.deleteItemFromCart.message
+});
+
+const mapDispatchToProps = dispatch => ({
+  deleteItem: itemId => dispatch(deleteItemFromCart(itemId)),
+  getProducts: () => dispatch(getProductsInShoppingCart())
+});
+
+export default connect(
+  mapStateToPtops,
+  mapDispatchToProps
+)(EditShoppingCartScreen);
