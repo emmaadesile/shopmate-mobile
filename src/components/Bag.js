@@ -73,6 +73,7 @@ const BagContainer = styled.View`
 const BagCount = styled.Text`
   font-family: sourceSansProBold;
   color: #fff;
+  font-size: 11px;
 `;
 
 const mapStateToProps = state => ({

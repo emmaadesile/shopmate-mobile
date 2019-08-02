@@ -5,9 +5,11 @@ import {
   ScrollView,
   TouchableOpacity
 } from "react-native";
+import { connect } from "react-redux";
 import NavHeader from "../../components/NavHeader";
 import TopBanner from "../../components/TopBanner";
 import OutWearHeader from "../../components/OutwearHeader";
+import getProductsInShoppingCart from "../../store/actions/getProductsInshoppingCartAction";
 import {
   Container,
   BodyText,
@@ -24,6 +26,11 @@ class ShoppingScreen extends React.Component {
   static navigationOptions = {
     header: null
   };
+
+  componentDidMount() {
+    const { getProductsInShoppingCart } = this.props;
+    getProductsInShoppingCart();
+  }
 
   render() {
     return (
@@ -68,4 +75,11 @@ class ShoppingScreen extends React.Component {
   }
 }
 
-export default ShoppingScreen;
+const mapDispatchToProps = dispatch => ({
+  getProductsInShoppingCart: () => dispatch(getProductsInShoppingCart())
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(ShoppingScreen);
