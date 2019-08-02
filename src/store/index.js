@@ -6,6 +6,8 @@ import products from "./reducers/productsReducer";
 import productDetails from "./reducers/productDetailsReducer";
 import addProductsToShoppingCart from "./reducers/addProductsToShoppingCartReducer";
 import getProductsInShoppingCart from "./reducers/getProductsInShoppingCartReducer";
+import deleteItemFromCart from "./reducers/deleteItemFromCartReducer";
+import updateAddress from "./reducers/updateAddress";
 
 const rootReducer = combineReducers({
   signup,
@@ -13,7 +15,9 @@ const rootReducer = combineReducers({
   products,
   productDetails,
   addProductsToShoppingCart,
-  getProductsInShoppingCart
+  getProductsInShoppingCart,
+  deleteItemFromCart,
+  updateAddress
 });
 
 const middleware = applyMiddleware(thunk);

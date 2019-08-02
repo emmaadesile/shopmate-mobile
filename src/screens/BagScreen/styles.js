@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 const Container = styled.View`
   width: 100%;
-  min-height: 100%;
+  min-height: 1000px;
+  max-height: 3000px;
 `;
 
 const EmptyContainer = styled.View`
@@ -61,7 +62,7 @@ const SubText = styled.Text`
 `;
 
 const CheckoutButton = styled.View`
-  width: 38%;
+  /* width: 38%; */
   background: #f3b453;
   align-items: center;
   justify-content: center;

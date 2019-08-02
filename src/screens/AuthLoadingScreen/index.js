@@ -1,6 +1,5 @@
 import React from "react";
 import { AsyncStorage } from "react-native";
-import { Font } from "expo";
 import Loader from "../../components/Loader";
 import { Container } from "./styles";
 
@@ -26,7 +25,7 @@ class AuthLoadingScreen extends React.Component {
         return navigate("AppIntro");
       }
 
-      this.setState = { loading: false };
+      this.setState({ loading: false });
 
       navigate(userToken ? "App" : "Auth");
     } catch (error) {
