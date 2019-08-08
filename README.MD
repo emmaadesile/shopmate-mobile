@@ -1,6 +1,6 @@
 ### App Screen
 
-![Shopmate Mobile][https://res.cloudinary.com/dn6fnuhxr/image/upload/v1564572809/appintro.gif]
+![Shopmate Mobile](https://res.cloudinary.com/dn6fnuhxr/image/upload/v1564572809/appintro.gif)
 
 ### Main Technologies used
 
