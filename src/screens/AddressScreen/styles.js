@@ -38,10 +38,28 @@ const SaveButton = styled.View`
   background-color: ${props => props.backgroundColor || "#C7C7C7"};
 `;
 
+const DeliverButton = styled.View`
+  height: 50px;
+  width: 100%;
+  border: 1px solid #efb961;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  margin-bottom: 15px;
+`;
+
+const DeliverButtonText = styled.Text`
+  font-family: sourceSansProRegular;
+  color: #737373;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+`;
+
 const ButtonText = styled.Text`
   font-family: sourceSansProBold;
   letter-spacing: 5px;
-  font-size: 15px;
+  font-size: 16px;
   text-transform: uppercase;
   color: #fff;
 `;
@@ -64,5 +82,7 @@ export {
   SaveButton,
   ButtonText,
   Row,
-  Column
+  Column,
+  DeliverButton,
+  DeliverButtonText
 };

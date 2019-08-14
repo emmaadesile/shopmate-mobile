@@ -14,6 +14,7 @@ import BagScreen from "../screens/BagScreen";
 import ProductDetailsScreen from "../screens/ProductDetailScreen";
 import EditShoppingCartScreen from "../screens/EditShoppingCartScreen";
 import AddressScreen from "../screens/AddressScreen";
+import PaymentScreen from "../screens/PaymentScreen";
 import ShopIcon from "../components/ShopIcon";
 import InspirationIcon from "../components/InspirationIcon";
 import StoresIcon from "../components/StoresIcon";
@@ -108,7 +109,8 @@ MoreStack.navigationOptions = {
 const BagStack = createStackNavigator({
   Bag: BagScreen,
   EditProduct: EditShoppingCartScreen,
-  Address: AddressScreen
+  Address: AddressScreen,
+  Payment: PaymentScreen
 });
 
 BagStack.navigationOptions = ({ navigation }) => {

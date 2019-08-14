@@ -1,23 +1,26 @@
 import React from "react";
 import styled from "styled-components";
 import Rhombus from "../components/Rhombus";
+import color from "../globals/colors";
 
 const CheckoutTopSection = ({ activeScreen }) => {
   return (
     <Container>
       <TopSection>
-        <TopText color={activeScreen === "address" && "#454545"}>
+        <TopText color={activeScreen === "address" && color.black60}>
           address
         </TopText>
-        <TopText color={activeScreen === "payment" && "#454545"}>
+        <TopText color={activeScreen === "payment" && color.black60}>
           payment
         </TopText>
-        <TopText color={activeScreen === "review" && "#454545"}>review</TopText>
+        <TopText color={activeScreen === "review" && color.black60}>
+          review
+        </TopText>
       </TopSection>
       <Wrapper>
-        <Rhombus fillColor={activeScreen === "address" && "#EFB961"} />
-        <Rhombus fillColor={activeScreen === "payment" && "#EFB961"} />
-        <Rhombus fillColor={activeScreen === "review" && "#EFB961"} />
+        <Rhombus fillColor={activeScreen === "address" && color.yellow} />
+        <Rhombus fillColor={activeScreen === "payment" && color.yellow} />
+        <Rhombus fillColor={activeScreen === "review" && color.yellow} />
       </Wrapper>
       <Divider />
     </Container>

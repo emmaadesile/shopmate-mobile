@@ -5,7 +5,8 @@ import {
   Keyboard,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  View
 } from "react-native";
 import { connect } from "react-redux";
 import debounce from "lodash.debounce";
@@ -23,7 +24,9 @@ import {
   SaveButton,
   ButtonText,
   Row,
-  Column
+  Column,
+  DeliverButton,
+  DeliverButtonText
 } from "./styles";
 
 class AddressScreen extends React.Component {
@@ -196,6 +199,17 @@ class AddressScreen extends React.Component {
               <Container>
                 <NavHeader />
                 <CheckoutTopSection activeScreen="address" />
+                <TouchableOpacity
+                  onPress={() => this.props.navigation.push("Payment")}
+                >
+                  <View style={{ paddingLeft: 15, paddingRight: 15 }}>
+                    <DeliverButton>
+                      <DeliverButtonText color={color.black60}>
+                        deliver to current address
+                      </DeliverButtonText>
+                    </DeliverButton>
+                  </View>
+                </TouchableOpacity>
                 <AddressForm>
                   <Row>
                     <Column width="100%">
