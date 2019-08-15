@@ -21,7 +21,10 @@ import {
   Address,
   LabelWrapper
 } from "./styles";
-import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import {
+  TouchableWithoutFeedback,
+  TouchableOpacity
+} from "react-native-gesture-handler";
 
 class PaymentScreen extends React.Component {
   static navigationOptions = {
@@ -33,13 +36,6 @@ class PaymentScreen extends React.Component {
     creditCard: "",
     expiryDate: "",
     cvc: ""
-  };
-
-  onCreditCardCardChange = digit => {
-    if (this.state.creditCard.length === 16) {
-      return null;
-    }
-    this.setState({ creditCard: digit });
   };
 
   render() {
@@ -154,9 +150,13 @@ class PaymentScreen extends React.Component {
                   efficitur vestibulum.
                 </Address>
               </ShippingAddress>
-              <PaynowButton>
-                <ButtonText>pay now</ButtonText>
-              </PaynowButton>
+              <TouchableOpacity
+                onPress={() => this.props.navigation.push("Complete")}
+              >
+                <PaynowButton>
+                  <ButtonText>pay now</ButtonText>
+                </PaynowButton>
+              </TouchableOpacity>
             </View>
           </Container>
         </ScrollView>

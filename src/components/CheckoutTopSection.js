@@ -13,14 +13,14 @@ const CheckoutTopSection = ({ activeScreen }) => {
         <TopText color={activeScreen === "payment" && color.black60}>
           payment
         </TopText>
-        <TopText color={activeScreen === "review" && color.black60}>
-          review
+        <TopText color={activeScreen === "complete" && color.black60}>
+          complete
         </TopText>
       </TopSection>
       <Wrapper>
         <Rhombus fillColor={activeScreen === "address" && color.yellow} />
         <Rhombus fillColor={activeScreen === "payment" && color.yellow} />
-        <Rhombus fillColor={activeScreen === "review" && color.yellow} />
+        <Rhombus fillColor={activeScreen === "complete" && color.yellow} />
       </Wrapper>
       <Divider />
     </Container>
