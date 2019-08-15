@@ -62,7 +62,6 @@ const SubText = styled.Text`
 `;
 
 const CheckoutButton = styled.View`
-  width: 38%;
   background: #f3b453;
   align-items: center;
   justify-content: center;
@@ -72,7 +71,7 @@ const CheckoutButton = styled.View`
 
 const CheckoutButtonText = styled.Text`
   font-size: 16px;
-  letter-spacing: 5px;
+  letter-spacing: 2px;
   color: #fff;
   text-transform: uppercase;
   font-family: sourceSansProBold;

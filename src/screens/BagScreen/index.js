@@ -108,9 +108,14 @@ class BagScreen extends React.Component {
                   <SubText> {this.calculateNoOfItems()} items </SubText>
                   in your shopping bag.
                 </TopText>
-                <CheckoutButton>
-                  <CheckoutButtonText>checkout</CheckoutButtonText>
-                </CheckoutButton>
+                <TouchableOpacity
+                  style={{ width: "38%" }}
+                  onPress={() => this.props.navigation.navigate("Address")}
+                >
+                  <CheckoutButton>
+                    <CheckoutButtonText>checkout</CheckoutButtonText>
+                  </CheckoutButton>
+                </TouchableOpacity>
               </TopSection>
               <ProductWrapper>
                 <Divider />

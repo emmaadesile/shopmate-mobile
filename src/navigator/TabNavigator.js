@@ -13,6 +13,9 @@ import MoreScreen from "../screens/MoreScreen";
 import BagScreen from "../screens/BagScreen";
 import ProductDetailsScreen from "../screens/ProductDetailScreen";
 import EditShoppingCartScreen from "../screens/EditShoppingCartScreen";
+import AddressScreen from "../screens/AddressScreen";
+import PaymentScreen from "../screens/PaymentScreen";
+import CompleteScreen from "../screens/CompleteScreen";
 import ShopIcon from "../components/ShopIcon";
 import InspirationIcon from "../components/InspirationIcon";
 import StoresIcon from "../components/StoresIcon";
@@ -106,21 +109,34 @@ MoreStack.navigationOptions = {
 
 const BagStack = createStackNavigator({
   Bag: BagScreen,
-  EditProduct: EditShoppingCartScreen
+  EditProduct: EditShoppingCartScreen,
+  Address: AddressScreen,
+  Payment: PaymentScreen,
+  Complete: CompleteScreen
 });
 
-BagStack.navigationOptions = {
-  // eslint-disable-next-line react/display-name
-  tabBarIcon: ({ focused }) => (
-    <Bag
-      strokeColor={focused ? colors.activeColor : colors.inActiveColor}
-      fillColor={focused ? colors.activeColor : colors.inActiveColor}
-      innerStrokeColor={focused ? colors.activeColor : "#fff"}
-      innerFillColor={focused ? colors.activeColor : "#fff"}
-    />
-  ),
-  tabBarLabel: ".",
-  tabBarOptions
+BagStack.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true;
+  const routeName = navigation.state.routes[navigation.state.index].routeName;
+
+  if (routeName === "Address") {
+    tabBarVisible = false;
+  }
+
+  return {
+    tabBarVisible,
+    // eslint-disable-next-line react/display-name
+    tabBarIcon: ({ focused }) => (
+      <Bag
+        strokeColor={focused ? colors.activeColor : colors.inActiveColor}
+        fillColor={focused ? colors.activeColor : colors.inActiveColor}
+        innerStrokeColor={focused ? colors.activeColor : "#fff"}
+        innerFillColor={focused ? colors.activeColor : "#fff"}
+      />
+    ),
+    tabBarLabel: ".",
+    tabBarOptions
+  };
 };
 
 export default createBottomTabNavigator({

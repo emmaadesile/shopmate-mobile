@@ -19,6 +19,6 @@
     "class-methods-use-this": "off",
     "react-native/no-inline-styles": "off",
     "react/jsx-boolean-value": "off",
-    "valid-jsdoc": "warn"
+    "valid-jsdoc": "off"
   }
 }
