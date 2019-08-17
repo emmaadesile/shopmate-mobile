@@ -39,13 +39,17 @@ const SaveButton = styled.View`
 `;
 
 const DeliverButton = styled.View`
-  height: 50px;
   width: 100%;
-  border: 1px solid #efb961;
-  align-items: center;
   justify-content: center;
   border-radius: 5px;
   margin-bottom: 15px;
+  padding: 18px;
+  flex-direction: row;
+  align-items: center;
+  border-bottom-width: 1px;
+  border-style: solid;
+  border-bottom-color: #bfbfbf;
+  background: #efefef;
 `;
 
 const DeliverButtonText = styled.Text`
@@ -54,11 +58,12 @@ const DeliverButtonText = styled.Text`
   font-size: 16px;
   text-transform: uppercase;
   letter-spacing: 2px;
+  padding: 15px;
 `;
 
 const ButtonText = styled.Text`
   font-family: sourceSansProBold;
-  letter-spacing: 5px;
+  letter-spacing: 2px;
   font-size: 16px;
   text-transform: uppercase;
   color: #fff;
@@ -74,6 +79,37 @@ const Row = styled.View`
   justify-content: space-between;
 `;
 
+const Title = styled.Text`
+  text-transform: uppercase;
+  font-size: 20px;
+  font-family: sourceSansProRegular;
+  color: #454545;
+  margin-bottom: 5px;
+  /* background: #efefef; */
+  padding: 10px 15px;
+`;
+
+const Wrapper = styled.View`
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+`;
+
+const Text = styled.Text`
+  text-transform: uppercase;
+  font-family: sourceSansProRegular;
+  color: #454545;
+  font-size: 17px;
+`;
+
+const Address = styled.View``;
+
+const AddressText = styled.Text`
+  font-family: sourceSansProRegular;
+  color: #454545;
+  font-size: 17px;
+`;
+
 export {
   Container,
   AddressForm,
@@ -84,5 +120,10 @@ export {
   Row,
   Column,
   DeliverButton,
-  DeliverButtonText
+  DeliverButtonText,
+  Title,
+  Text,
+  Wrapper,
+  Address,
+  AddressText
 };

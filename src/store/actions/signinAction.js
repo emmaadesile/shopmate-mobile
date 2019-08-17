@@ -1,5 +1,6 @@
 import axios from "axios";
 import { BASEURL } from "react-native-dotenv";
+import { showMessage } from "react-native-flash-message";
 import { saveUserToken } from "./authAction";
 
 export const SIGNIN_LOADING = "SIGNIN_LOADING";
@@ -40,7 +41,12 @@ const signin = (email, password) => dispatch => {
     })
     .catch(error => {
       dispatch(signinLoading(false));
+      const message = error.message || "Invalid login credentials";
       dispatch(signinError(error.message || "Invalid login credentials"));
+      showMessage({
+        message,
+        type: "error"
+      });
     });
 };
 

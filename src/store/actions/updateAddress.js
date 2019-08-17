@@ -1,7 +1,7 @@
 import axios from "axios";
 import { BASEURL } from "react-native-dotenv";
 import { showMessage } from "react-native-flash-message";
-import { AsyncStorage } from "react-native";
+import { getUserToken } from "../actions/authAction";
 
 export const UPDATE_ADDRESS_LOADING = "UPDATE_ADDRESS_LOADING";
 export const UPDATE_ADDRESS_SUCCESS = "UPDATE_ADDRESS_SUCCESS";
@@ -12,9 +12,9 @@ const updateAddressLoading = loading => ({
   payload: loading
 });
 
-const updateAddressSuccess = ({ customer, message }) => ({
+const updateAddressSuccess = ({ customer, message, isSuccessful }) => ({
   type: UPDATE_ADDRESS_SUCCESS,
-  payload: { customer, message }
+  payload: { customer, message, isSuccessful }
 });
 
 const updateAddressError = error => ({
@@ -32,8 +32,7 @@ const updateAddress = (
   shipping_region_id,
   mob_phone
 ) => async dispatch => {
-  const userToken = await AsyncStorage.getItem("userToken");
-
+  const userToken = await getUserToken();
   dispatch(updateAddressLoading(true));
 
   axios
@@ -51,17 +50,21 @@ const updateAddress = (
       },
       {
         headers: {
-          "user-key":
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjdXN0b21lcl9pZCI6MTYwLCJuYW1lIjoid2VlZCIsInJvbGUiOiJjdXN0b21lciIsImlhdCI6MTU2NTI2NjYwOCwiZXhwIjoxNTY1MzUzMDA4fQ.uJQqDNk6DcxdV3fcluWHLvuvlSqUUIUrkrAolKtbk6k"
+          "user-key": userToken
         }
       }
     )
     .then(response => {
       dispatch(updateAddressLoading(false));
       if (response.status === 200) {
-        console.log(response.data);
         const message = "Address was successfully updated";
-        dispatch(updateAddressSuccess({ customer: response.data, message }));
+        dispatch(
+          updateAddressSuccess({
+            message,
+            isSuccessful: true,
+            customer: response.data
+          })
+        );
 
         showMessage({
           message,

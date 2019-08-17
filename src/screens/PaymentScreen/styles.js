@@ -101,10 +101,11 @@ const ButtonText = styled.Text`
   letter-spacing: 3px;
 `;
 
-const Address = styled.Text`
+const Address = styled.View`
   font-family: sourceSansProRegular;
   color: ${props => props.color || "#999999"};
   font-size: ${props => props.fontSize || "17px"};
+  flex-direction: row;
 `;
 
 export {
