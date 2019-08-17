@@ -42,14 +42,11 @@ const DeliverButton = styled.View`
   width: 100%;
   justify-content: center;
   border-radius: 5px;
-  margin-bottom: 15px;
-  padding: 18px;
+  margin-bottom: 20px;
+  padding: 18px 10px;
   flex-direction: row;
   align-items: center;
-  border-bottom-width: 1px;
-  border-style: solid;
-  border-bottom-color: #bfbfbf;
-  background: #efefef;
+  border: 1px solid #efefef;
 `;
 
 const DeliverButtonText = styled.Text`
@@ -71,7 +68,7 @@ const ButtonText = styled.Text`
 
 const Column = styled.View`
   width: ${props => props.width || "48%"};
-  margin-top: 20px;
+  margin-top: ${props => props.marginTop || "20px"};
 `;
 
 const Row = styled.View`
@@ -84,8 +81,7 @@ const Title = styled.Text`
   font-size: 20px;
   font-family: sourceSansProRegular;
   color: #454545;
-  margin-bottom: 5px;
-  /* background: #efefef; */
+  margin-bottom: ${props => props.marginBottom || "5px"};
   padding: 10px 15px;
 `;
 
@@ -102,12 +98,10 @@ const Text = styled.Text`
   font-size: 17px;
 `;
 
-const Address = styled.View``;
-
 const AddressText = styled.Text`
   font-family: sourceSansProRegular;
   color: #454545;
-  font-size: 17px;
+  font-size: 18px;
 `;
 
 export {
@@ -124,6 +118,5 @@ export {
   Title,
   Text,
   Wrapper,
-  Address,
   AddressText
 };

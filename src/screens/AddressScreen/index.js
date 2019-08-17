@@ -227,12 +227,11 @@ class AddressScreen extends React.Component {
                       <TouchableOpacity
                         onPress={() => this.props.navigation.push("Payment")}
                       >
-                        {/* <View style={{ paddingLeft: 15, paddingRight: 15 }}> */}
                         <Title>ship to</Title>
                         <DeliverButton>
-                          <View width="90%">
+                          <View width="90%" style={{ paddingLeft: 10 }}>
                             <AddressText>
-                              {address_1} {address_2}
+                              {address_1}, {address_2}
                             </AddressText>
                             <AddressText>
                               {city}, {region}, {country}
@@ -247,13 +246,12 @@ class AddressScreen extends React.Component {
                             selectedButtonColor={"#EFB961"}
                           />
                         </DeliverButton>
-                        {/* </View> */}
                       </TouchableOpacity>
                     )}
                     <Title>enter a new address</Title>
                     <AddressForm>
                       <Row>
-                        <Column width="100%">
+                        <Column width="100%" marginTop="20px">
                           <Label>Address Line 1</Label>
                           <Input
                             onChangeText={address_1 => {

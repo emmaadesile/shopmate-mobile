@@ -2,7 +2,6 @@ import React from "react";
 // import { connect } from "react-redux";
 import { SafeAreaView, ScrollView, View, StyleSheet } from "react-native";
 import NavHeader from "../../components/NavHeader";
-// import getCustomer from "../../store/actions/getCustomer";
 import CheckoutTopSection from "../../components/CheckoutTopSection";
 import colors from "../../globals/colors";
 import {
@@ -17,10 +16,8 @@ import {
   Wrapper,
   Image,
   Row,
-  // ShippingAddress,
   PaynowButton,
   ButtonText,
-  // Address,
   LabelWrapper
 } from "./styles";
 import {
@@ -145,14 +142,6 @@ class PaymentScreen extends React.Component {
                 paddingRight: 10
               }}
             >
-              {/* <ShippingAddress> */}
-              {/* <Address> */}
-              {/* Donec urna nibh, vulputate commodo mauris et, porttitor
-                  porttitor mauris. Integer sit amet arcu sit amet massa
-                  efficitur vestibulum. */}
-              {}
-              {/* </Address> */}
-              {/* </ShippingAddress> */}
               <TouchableOpacity
                 onPress={() => this.props.navigation.push("Complete")}
               >
