@@ -1,6 +1,8 @@
 import React from "react";
+// import { connect } from "react-redux";
 import { SafeAreaView, ScrollView, View, StyleSheet } from "react-native";
 import NavHeader from "../../components/NavHeader";
+// import getCustomer from "../../store/actions/getCustomer";
 import CheckoutTopSection from "../../components/CheckoutTopSection";
 import colors from "../../globals/colors";
 import {
@@ -15,10 +17,10 @@ import {
   Wrapper,
   Image,
   Row,
-  ShippingAddress,
+  // ShippingAddress,
   PaynowButton,
   ButtonText,
-  Address,
+  // Address,
   LabelWrapper
 } from "./styles";
 import {
@@ -143,13 +145,14 @@ class PaymentScreen extends React.Component {
                 paddingRight: 10
               }}
             >
-              <ShippingAddress>
-                <Address>
-                  Donec urna nibh, vulputate commodo mauris et, porttitor
+              {/* <ShippingAddress> */}
+              {/* <Address> */}
+              {/* Donec urna nibh, vulputate commodo mauris et, porttitor
                   porttitor mauris. Integer sit amet arcu sit amet massa
-                  efficitur vestibulum.
-                </Address>
-              </ShippingAddress>
+                  efficitur vestibulum. */}
+              {}
+              {/* </Address> */}
+              {/* </ShippingAddress> */}
               <TouchableOpacity
                 onPress={() => this.props.navigation.push("Complete")}
               >
@@ -173,5 +176,15 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   }
 });
+
+// const mapStateToProps = state => ({
+//   loading: state.getCustomer.loading,
+//   isSuccessful: state.getCustomer.isSuccessful,
+//   customer: state.getCustomer.customer
+// });
+
+// const mapDispatchToProps = dispatch => ({
+//   getCustomerDetails: () => dispatch(getCustomer())
+// });
 
 export default PaymentScreen;

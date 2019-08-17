@@ -60,14 +60,13 @@ const BagContainer = styled.View`
   align-items: center;
   justify-content: center;
   background: #454545;
-  border: rgb(235, 235, 235);
   border: 1.5px solid #eee;
-  width: 20px;
-  height: 20px;
-  border-radius: 10px;
+  width: 26px;
+  height: 26px;
+  border-radius: 14px;
   position: absolute;
-  top: 30px;
-  right: 20px;
+  top: 26px;
+  right: 18px;
 `;
 
 const BagCount = styled.Text`

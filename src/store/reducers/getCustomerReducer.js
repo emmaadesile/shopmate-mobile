@@ -1,39 +1,35 @@
 import {
-  UPDATE_ADDRESS_LOADING,
-  UPDATE_ADDRESS_SUCCESS,
-  UPDATE_ADDRESS_ERROR
-} from "../actions/updateAddress";
+  GET_CUSTOMER_LOADING,
+  GET_CUSTOMER_ERROR,
+  GET_CUSTOMER_SUCCESS
+} from "../actions/getCustomer";
 
 const initialState = {
-  customer: [],
   loading: false,
-  isSuccessful: false,
-  message: "",
+  isSuccessful: "",
+  customer: "",
   error: ""
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case UPDATE_ADDRESS_LOADING:
+    case GET_CUSTOMER_LOADING:
       return {
         ...state,
         loading: action.payload
       };
-
-    case UPDATE_ADDRESS_SUCCESS:
+    case GET_CUSTOMER_SUCCESS:
       return {
         ...state,
         customer: action.payload.customer,
-        message: action.payload.message,
         isSuccessful: action.payload.isSuccessful
       };
 
-    case UPDATE_ADDRESS_ERROR:
+    case GET_CUSTOMER_ERROR:
       return {
         ...state,
         error: action.payload
       };
-
     default:
       return state;
   }

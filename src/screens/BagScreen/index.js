@@ -1,9 +1,10 @@
 import React from "react";
 import { SafeAreaView, View, TouchableOpacity, ScrollView } from "react-native";
-import { StackActions, NavigationActions } from "react-navigation";
 import { connect } from "react-redux";
+import jwt from "jwt-decode";
 import getProductsInshoppingCart from "../../store/actions/getProductsInshoppingCartAction";
 import Loading from "../../components/Loading";
+import { getUserToken } from "../../store/actions/authAction";
 import {
   Container,
   EmptyContainer,
@@ -42,19 +43,19 @@ class BagScreen extends React.Component {
     getProductsInshoppingCart();
   }
 
-  // componentDidUpdate() {
-  // const { getProductsInshoppingCart, deleteItemSuccess } = this.props;
-  // if (deleteItemSuccess) {
-  //   return getProductsInshoppingCart();
-  // }
+  /**
+   * @description Get the expiration date of userToken
+   * @returns boolean
+   */
+  isTokenExpired = async () => {
+    const token = await getUserToken();
+    const { exp } = jwt(token);
+    return Date.now() > Number(exp) * 1000;
+  };
 
-  //   const resetAction = StackActions.reset({
-  //     index: 0,
-  //     actions: [NavigationActions.navigate({ routeName: "Bag" })]
-  //   });
-  //   this.props.navigation.dispatch(resetAction);
-  // }
-
+  /**
+   * @description Reanders an empty cart
+   */
   renderEmptyCart = () => (
     <EmptyContainer>
       <Wrapper>
@@ -64,6 +65,10 @@ class BagScreen extends React.Component {
     </EmptyContainer>
   );
 
+  /**
+   * @description calculate the subtotal of cart items
+   * @returns {number} subtotal
+   */
   calculateSubTotal = () => {
     const { products } = this.props;
     let subtotal = 0;
@@ -72,11 +77,19 @@ class BagScreen extends React.Component {
     return subtotal.toFixed(0);
   };
 
+  /**
+   * @description calculate the number of items
+   * @returns {number} product.length
+   */
   calculateNoOfItems = () => {
     const { products } = this.props;
     return products.length;
   };
 
+  /**
+   * @description shorten product length if its too long
+   * @returns {string} name
+   */
   shortenProductName = name => {
     if (name.length > 15) {
       return `${name.substr(0, 15)}...`;
@@ -85,6 +98,10 @@ class BagScreen extends React.Component {
     return name;
   };
 
+  /**
+   * @description calculate the total price of products in cart
+   * @returns {number} price
+   */
   calculateTotalPrice = () => {
     return (Number(this.calculateSubTotal()) + 10).toFixed(0);
   };
@@ -110,7 +127,11 @@ class BagScreen extends React.Component {
                 </TopText>
                 <TouchableOpacity
                   style={{ width: "38%" }}
-                  onPress={() => this.props.navigation.navigate("Address")}
+                  onPress={() => {
+                    this.isTokenExpired() === true
+                      ? this.props.navigation.navigate("Login")
+                      : this.props.navigation.navigate("Address");
+                  }}
                 >
                   <CheckoutButton>
                     <CheckoutButtonText>checkout</CheckoutButtonText>

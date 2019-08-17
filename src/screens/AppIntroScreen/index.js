@@ -26,16 +26,14 @@ export default class AppIntro extends React.Component {
 
   render() {
     return (
-      <>
-        <AppIntroSlider
-          slides={slides}
-          onDone={this._onDone}
-          nextLabel="Continue"
-          bottomButton
-          buttonStyle={styles.buttonStyle}
-          buttonTextStyle={styles.buttonTextStyle}
-        />
-      </>
+      <AppIntroSlider
+        slides={slides}
+        onDone={this._onDone}
+        nextLabel="Continue"
+        bottomButton
+        buttonStyle={styles.buttonStyle}
+        buttonTextStyle={styles.buttonTextStyle}
+      />
     );
   }
 }

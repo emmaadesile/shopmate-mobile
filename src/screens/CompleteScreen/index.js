@@ -27,9 +27,7 @@ class CompleteScreen extends React.Component {
           <NavHeader />
           <CheckoutTopSection activeScreen="complete" />
           <TopSection>
-            {/* <Icon> */}
             <Checkmark />
-            {/* </Icon> */}
             <Title>Thank you</Title>
             <Text>
               We’ve sent you an email with all the details of your order. You

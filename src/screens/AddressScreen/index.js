@@ -10,11 +10,13 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import debounce from "lodash.debounce";
+import RadioForm from "react-native-simple-radio-button";
 import updateAddress from "../../store/actions/updateAddress";
+import getCustomer from "../../store/actions/getCustomer";
 import { validateAddressForm } from "../../helpers/formValidation";
 import CheckoutTopSection from "../../components/CheckoutTopSection";
 import NavHeader from "../../components/NavHeader";
-import Loader from "../../components/Loader";
+import Loading from "../../components/Loading";
 import color from "../../globals/colors";
 import {
   Container,
@@ -26,7 +28,10 @@ import {
   Row,
   Column,
   DeliverButton,
-  DeliverButtonText
+  Title,
+  Text,
+  Wrapper,
+  AddressText
 } from "./styles";
 
 class AddressScreen extends React.Component {
@@ -54,6 +59,16 @@ class AddressScreen extends React.Component {
     isCountryFocused: false,
     isMobilePhoneFocused: false
   };
+
+  componentDidUpdate() {
+    if (this.props.isSuccessful) {
+      this.props.navigation.push("Payment");
+    }
+  }
+
+  componentDidMount() {
+    this.props.getCustomerDetails();
+  }
 
   addressFormValidation = debounce(() => {
     const {
@@ -165,17 +180,6 @@ class AddressScreen extends React.Component {
       mob_phone
     } = this.state;
 
-    this.props.updateCustomerAddress(
-      address_1,
-      address_2,
-      city,
-      region,
-      postal_code,
-      country,
-      shipping_region_id,
-      mob_phone
-    );
-
     this.setState({
       address_1: "",
       address_2: "",
@@ -186,10 +190,26 @@ class AddressScreen extends React.Component {
       shipping_region_id: "",
       mob_phone: ""
     });
+
+    this.props.updateCustomerAddress(
+      address_1,
+      address_2,
+      city,
+      region,
+      postal_code,
+      country,
+      shipping_region_id,
+      mob_phone
+    );
   };
 
   render() {
-    const { loading } = this.props;
+    const {
+      loading,
+      customer: { address_1, address_2, city, region, country }
+    } = this.props;
+
+    const radio_props = [{ label: "", value: 0 }];
 
     return (
       <KeyboardAvoidingView>
@@ -199,145 +219,171 @@ class AddressScreen extends React.Component {
               <Container>
                 <NavHeader />
                 <CheckoutTopSection activeScreen="address" />
-                <TouchableOpacity
-                  onPress={() => this.props.navigation.push("Payment")}
-                >
-                  <View style={{ paddingLeft: 15, paddingRight: 15 }}>
-                    <DeliverButton>
-                      <DeliverButtonText color={color.black60}>
-                        deliver to current address
-                      </DeliverButtonText>
-                    </DeliverButton>
-                  </View>
-                </TouchableOpacity>
-                <AddressForm>
-                  <Row>
-                    <Column width="100%">
-                      <Label>Address Line 1</Label>
-                      <Input
-                        onChangeText={address_1 => {
-                          this.setState({ address_1 });
-                          this.addressFormValidation();
-                        }}
-                        value={this.state.address_1}
-                        onFocus={this.onAddressOneFocusChange}
-                        onBlur={this.onAddressOneFocusChange}
-                        borderColor={
-                          this.state.isAddressOneFocused && color.yellow
-                        }
-                      />
-                    </Column>
-                  </Row>
-                  <Row>
-                    <Column width="100%">
-                      <Label>Address Line 2</Label>
-                      <Input
-                        onChangeText={address_2 => {
-                          this.setState({ address_2 });
-                          this.addressFormValidation();
-                        }}
-                        value={this.state.address_2}
-                        onFocus={this.onAddressTwoFocusChange}
-                        onBlur={this.onAddressTwoFocusChange}
-                        borderColor={
-                          this.state.isAddressTwoFocused && color.yellow
-                        }
-                      />
-                    </Column>
-                  </Row>
-                  <Row>
-                    <Column>
-                      <Label>City</Label>
-                      <Input
-                        onChangeText={city => {
-                          this.setState({ city });
-                          this.addressFormValidation();
-                        }}
-                        value={this.state.city}
-                        onFocus={this.onCityFocusChange}
-                        onBlur={this.onCityFocusChange}
-                        borderColor={this.state.isCityFocused && color.yellow}
-                      />
-                    </Column>
-                    <Column>
-                      <Label>Region</Label>
-                      <Input
-                        onChangeText={region => {
-                          this.setState({ region });
-                          this.addressFormValidation();
-                        }}
-                        value={this.state.region}
-                        onFocus={this.onRegionFocusChange}
-                        onBlur={this.onRegionFocusChange}
-                        borderColor={this.state.isRegionFocused && color.yellow}
-                      />
-                    </Column>
-                  </Row>
-                  <Row>
-                    <Column>
-                      <Label>Postal Code</Label>
-                      <Input
-                        keyboardType="numeric"
-                        onChangeText={postal_code => {
-                          this.setState({ postal_code });
-                          this.addressFormValidation();
-                        }}
-                        value={this.state.postal_code}
-                        onFocus={this.onPostalCodeChange}
-                        onBlur={this.onPostalCodeChange}
-                        borderColor={
-                          this.state.isPostalCodeFocused && color.yellow
-                        }
-                      />
-                    </Column>
-                    <Column>
-                      <Label>Country</Label>
-                      <Input
-                        onChangeText={country => {
-                          this.setState({ country });
-                          this.addressFormValidation();
-                        }}
-                        value={this.state.country}
-                        onFocus={this.onCountyFocusChange}
-                        onBlur={this.onCountyFocusChange}
-                        borderColor={
-                          this.state.isCountryFocused && color.yellow
-                        }
-                      />
-                    </Column>
-                  </Row>
-                  <Row>
-                    <Column>
-                      <Label>Mobile Phone</Label>
-                      <Input
-                        keyboardType="numeric"
-                        onChangeText={mob_phone => {
-                          this.setState({ mob_phone });
-                          this.addressFormValidation();
-                        }}
-                        value={this.state.mob_phone}
-                        onFocus={this.onMobilePhoneFocusChange}
-                        onBlur={this.onMobilePhoneFocusChange}
-                        borderColor={
-                          this.state.isMobilePhoneFocused && color.yellow
-                        }
-                      />
-                    </Column>
-                  </Row>
-                  <TouchableOpacity
-                    onPress={this.updateCustomerAddress}
-                    disabled={!this.state.isValid}
-                    style={{ marginTop: 30 }}
-                  >
-                    <SaveButton
-                      backgroundColor={this.state.isValid && color.black60}
-                    >
-                      <ButtonText>save and continue</ButtonText>
-                    </SaveButton>
-                  </TouchableOpacity>
-                </AddressForm>
+                {loading ? (
+                  <Loading />
+                ) : (
+                  <>
+                    {address_1 && (
+                      <TouchableOpacity
+                        onPress={() => this.props.navigation.push("Payment")}
+                      >
+                        {/* <View style={{ paddingLeft: 15, paddingRight: 15 }}> */}
+                        <Title>ship to</Title>
+                        <DeliverButton>
+                          <View width="90%">
+                            <AddressText>
+                              {address_1} {address_2}
+                            </AddressText>
+                            <AddressText>
+                              {city}, {region}, {country}
+                            </AddressText>
+                          </View>
+
+                          <RadioForm
+                            radio_props={radio_props}
+                            initial={0}
+                            onPress={() => null}
+                            buttonColor={"#EFB961"}
+                            selectedButtonColor={"#EFB961"}
+                          />
+                        </DeliverButton>
+                        {/* </View> */}
+                      </TouchableOpacity>
+                    )}
+                    <Title>enter a new address</Title>
+                    <AddressForm>
+                      <Row>
+                        <Column width="100%">
+                          <Label>Address Line 1</Label>
+                          <Input
+                            onChangeText={address_1 => {
+                              this.setState({ address_1 });
+                              this.addressFormValidation();
+                            }}
+                            value={this.state.address_1}
+                            onFocus={this.onAddressOneFocusChange}
+                            onBlur={this.onAddressOneFocusChange}
+                            borderColor={
+                              this.state.isAddressOneFocused && color.yellow
+                            }
+                          />
+                        </Column>
+                      </Row>
+                      <Row>
+                        <Column width="100%">
+                          <Label>Address Line 2</Label>
+                          <Input
+                            onChangeText={address_2 => {
+                              this.setState({ address_2 });
+                              this.addressFormValidation();
+                            }}
+                            value={this.state.address_2}
+                            onFocus={this.onAddressTwoFocusChange}
+                            onBlur={this.onAddressTwoFocusChange}
+                            borderColor={
+                              this.state.isAddressTwoFocused && color.yellow
+                            }
+                          />
+                        </Column>
+                      </Row>
+                      <Row>
+                        <Column>
+                          <Label>City</Label>
+                          <Input
+                            onChangeText={city => {
+                              this.setState({ city });
+                              this.addressFormValidation();
+                            }}
+                            value={this.state.city}
+                            onFocus={this.onCityFocusChange}
+                            onBlur={this.onCityFocusChange}
+                            borderColor={
+                              this.state.isCityFocused && color.yellow
+                            }
+                          />
+                        </Column>
+                        <Column>
+                          <Label>Region</Label>
+                          <Input
+                            onChangeText={region => {
+                              this.setState({ region });
+                              this.addressFormValidation();
+                            }}
+                            value={this.state.region}
+                            onFocus={this.onRegionFocusChange}
+                            onBlur={this.onRegionFocusChange}
+                            borderColor={
+                              this.state.isRegionFocused && color.yellow
+                            }
+                          />
+                        </Column>
+                      </Row>
+                      <Row>
+                        <Column>
+                          <Label>Postal Code</Label>
+                          <Input
+                            keyboardType="numeric"
+                            onChangeText={postal_code => {
+                              this.setState({ postal_code });
+                              this.addressFormValidation();
+                            }}
+                            value={this.state.postal_code}
+                            onFocus={this.onPostalCodeChange}
+                            onBlur={this.onPostalCodeChange}
+                            borderColor={
+                              this.state.isPostalCodeFocused && color.yellow
+                            }
+                          />
+                        </Column>
+                        <Column>
+                          <Label>Country</Label>
+                          <Input
+                            onChangeText={country => {
+                              this.setState({ country });
+                              this.addressFormValidation();
+                            }}
+                            value={this.state.country}
+                            onFocus={this.onCountyFocusChange}
+                            onBlur={this.onCountyFocusChange}
+                            borderColor={
+                              this.state.isCountryFocused && color.yellow
+                            }
+                          />
+                        </Column>
+                      </Row>
+                      <Row>
+                        <Column>
+                          <Label>Mobile Phone</Label>
+                          <Input
+                            keyboardType="numeric"
+                            onChangeText={mob_phone => {
+                              this.setState({ mob_phone });
+                              this.addressFormValidation();
+                            }}
+                            value={this.state.mob_phone}
+                            onFocus={this.onMobilePhoneFocusChange}
+                            onBlur={this.onMobilePhoneFocusChange}
+                            borderColor={
+                              this.state.isMobilePhoneFocused && color.yellow
+                            }
+                          />
+                        </Column>
+                      </Row>
+                      <TouchableOpacity
+                        onPress={this.updateCustomerAddress}
+                        disabled={!this.state.isValid}
+                        style={{ marginTop: 30 }}
+                      >
+                        <SaveButton
+                          backgroundColor={this.state.isValid && color.black60}
+                        >
+                          <ButtonText>save and continue</ButtonText>
+                        </SaveButton>
+                      </TouchableOpacity>
+                    </AddressForm>
+                  </>
+                )}
               </Container>
-              <Loader isLoading={loading} />
             </ScrollView>
           </TouchableWithoutFeedback>
         </SafeAreaView>
@@ -347,7 +393,12 @@ class AddressScreen extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  loading: state.updateAddress.loading
+  loading: state.updateAddress.loading,
+  message: state.updateAddress.message,
+  isSuccessful: state.updateAddress.isSuccessful,
+
+  customer: state.getCustomer.customer
+  // customerLoading: state.getCustomer.laoding
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -372,7 +423,8 @@ const mapDispatchToProps = dispatch => ({
         shipping_region_id,
         mob_phone
       )
-    )
+    ),
+  getCustomerDetails: () => dispatch(getCustomer())
 });
 
 export default connect(

@@ -11,9 +11,9 @@ const getCustomerLoading = loading => ({
   payload: loading
 });
 
-const getCustomerSuccess = customer => ({
+const getCustomerSuccess = ({ customer, isSuccessful }) => ({
   type: GET_CUSTOMER_SUCCESS,
-  payload: customer
+  payload: { customer, isSuccessful }
 });
 
 const getCustomerError = error => ({
@@ -34,7 +34,9 @@ const getCustomer = () => async dispatch => {
     })
     .then(response => {
       if (response.status === 200) {
-        return dispatch(getCustomerSuccess(response.data));
+        return dispatch(
+          getCustomerSuccess({ customer: response.data, isSuccessful: true })
+        );
       }
     })
     .catch(error => {
