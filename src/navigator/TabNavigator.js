@@ -5,6 +5,10 @@ import {
 } from "react-navigation";
 import * as Icon from "@expo/vector-icons";
 import InspirationScreen from "../screens/InspirationScreen";
+import InpirationLifeScreen from "../screens/InspirationLifeScreen";
+import InspirationLifeDetailsScreen from "../screens/InspirationLifeDetailsScreen";
+import InspirationVideoScreen from "../screens/InspirationVideoScreen";
+import InspirationFashionScreen from "../screens/InspirationFashionScreen";
 import StoresScreen from "../screens/StoresScreen";
 import ShoppingScreen from "../screens/ShoppingScreen";
 import MenShopScreen from "../screens/MenShopScreen";
@@ -62,16 +66,35 @@ ShoppingStack.navigationOptions = ({ navigation }) => {
 };
 
 const InspirationStack = createStackNavigator({
-  Inspiration: InspirationScreen
+  Inspiration: InspirationScreen,
+  Life: InpirationLifeScreen,
+  LifeDetails: InspirationLifeDetailsScreen,
+  Videos: InspirationVideoScreen,
+  Fashion: InspirationFashionScreen
 });
 
-InspirationStack.navigationOptions = {
-  tabBarLabel: "Inspiration",
-  tabBarOptions,
-  // eslint-disable-next-line react/display-name
-  tabBarIcon: ({ focused }) => (
-    <InspirationIcon fillColor={focused ? colors.activeColor : "#fff"} />
-  )
+InspirationStack.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true;
+
+  const routeName = navigation.state.routes[navigation.state.index].routeName;
+
+  if (
+    routeName === "Life" ||
+    routeName === "LifeDetails" ||
+    routeName === "Videos" ||
+    routeName === "Fashion"
+  ) {
+    tabBarVisible = false;
+  }
+  return {
+    tabBarVisible,
+    tabBarLabel: "Inspiration",
+    tabBarOptions,
+    // eslint-disable-next-line react/display-name
+    tabBarIcon: ({ focused }) => (
+      <InspirationIcon fillColor={focused ? colors.activeColor : "#fff"} />
+    )
+  };
 };
 
 const StoresStack = createStackNavigator({

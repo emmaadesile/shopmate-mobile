@@ -16,7 +16,8 @@ export default class App extends React.Component {
         sourceSansProRegular: require("./assets/fonts/SourceSansProRegular.otf"),
         sourceSansProLight: require("./assets/fonts/SourceSansProLight.otf"),
         sourceSansProBold: require("./assets/fonts/SourceSansProBold.otf"),
-        sourceSansProExtraLight: require("./assets/fonts/SourceSansProLight.otf")
+        sourceSansProExtraLight: require("./assets/fonts/SourceSansProLight.otf"),
+        Bodoni: require("./assets/fonts/Bodoni.ttf")
       });
       this.setState({ fontLoaded: true });
     } catch (error) {
