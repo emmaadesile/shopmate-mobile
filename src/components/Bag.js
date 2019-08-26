@@ -7,9 +7,28 @@ import ShoppingBag from "./ShoppingBag";
 
 class Bag extends React.Component {
   render() {
-    const { products } = this.props;
+    const { products, tabNav } = this.props;
     const productsCount = products.length;
-    return (
+    return !tabNav ? (
+      <>
+        <ShoppingBag
+          fillColor={this.props.fillColor}
+          strokeColor={this.props.strokeColor}
+          innerStrokeColor={this.props.innerStrokeColor}
+          innerFillColor={this.props.innerFillColor}
+        />
+        {productsCount > 0 ? (
+          <BagContainer2
+            background={!tabNav && "#F3B453"}
+            border={!tabNav && "#404040"}
+          >
+            <BagCount color={!tabNav && "#454545"} fontSize={!tabNav && 14}>
+              {productsCount}
+            </BagCount>
+          </BagContainer2>
+        ) : null}
+      </>
+    ) : (
       <Container>
         <LinearGradient
           colors={["rgba(193, 189, 189,0)", "rgba(236, 236, 236, 1)"]}
@@ -23,6 +42,7 @@ class Bag extends React.Component {
           }}
         />
         <SubContainer />
+
         <ShoppingBag
           fillColor={this.props.fillColor}
           strokeColor={this.props.strokeColor}
@@ -31,7 +51,9 @@ class Bag extends React.Component {
         />
         {productsCount > 0 ? (
           <BagContainer>
-            <BagCount>{productsCount}</BagCount>
+            <BagCount color={!tabNav && "#454545"} fontSize={!tabNav && 14}>
+              {productsCount}
+            </BagCount>
           </BagContainer>
         ) : null}
       </Container>
@@ -59,8 +81,8 @@ const SubContainer = styled.View`
 const BagContainer = styled.View`
   align-items: center;
   justify-content: center;
-  background: #454545;
-  border: 1.5px solid #eee;
+  background: ${props => props.background || "#454545"};
+  border: ${props => props.border || "1.5px solid #eee"};
   width: 26px;
   height: 26px;
   border-radius: 14px;
@@ -69,10 +91,23 @@ const BagContainer = styled.View`
   right: 18px;
 `;
 
+const BagContainer2 = styled.View`
+  align-items: center;
+  justify-content: center;
+  background: ${props => props.background || "#454545"};
+  border: ${props => props.border || "1.5px solid #eee"};
+  width: 26px;
+  height: 26px;
+  border-radius: 14px;
+  position: absolute;
+  top: -5px;
+  right: -10px;
+`;
+
 const BagCount = styled.Text`
   font-family: sourceSansProBold;
-  color: #fff;
-  font-size: 11px;
+  color: ${props => props.color || "#fff"};
+  font-size: ${props => props.fontSize || "11px"};
 `;
 
 const mapStateToProps = state => ({

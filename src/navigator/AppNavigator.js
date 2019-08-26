@@ -7,7 +7,7 @@ import SignupScreen from "../screens/SignupScreen";
 import LoginScreen from "../screens/LoginScreen";
 import AppIntroScreen from "../screens/AppIntroScreen";
 import AuthLoadingScreen from "../screens/AuthLoadingScreen";
-import TabNavigator from "../navigator/TabNavigator";
+import AppDrawerNavigator from "./AppDrawerNavigiator";
 
 const AuthStack = createStackNavigator({
   Login: LoginScreen,
@@ -24,7 +24,7 @@ const App = createAppContainer(
       AuthLoading: AuthLoadingScreen,
       AppIntro: AppIntroStack,
       Auth: AuthStack,
-      App: TabNavigator
+      App: AppDrawerNavigator
     },
     {
       initialRouteName: "AuthLoading"

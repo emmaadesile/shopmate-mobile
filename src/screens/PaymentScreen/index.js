@@ -45,7 +45,7 @@ class PaymentScreen extends React.Component {
       <SafeAreaView>
         <ScrollView>
           <Container>
-            <NavHeader />
+            <NavHeader openDrawer={this.props.navigation.openDrawer} />
             <CheckoutTopSection activeScreen="payment" />
             <View style={{ paddingLeft: 15, paddingRight: 15 }}>
               <Cards>

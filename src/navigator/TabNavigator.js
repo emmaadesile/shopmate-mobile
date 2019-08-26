@@ -151,6 +151,7 @@ BagStack.navigationOptions = ({ navigation }) => {
     // eslint-disable-next-line react/display-name
     tabBarIcon: ({ focused }) => (
       <Bag
+        tabNav={true}
         strokeColor={focused ? colors.activeColor : colors.inActiveColor}
         fillColor={focused ? colors.activeColor : colors.inActiveColor}
         innerStrokeColor={focused ? colors.activeColor : "#fff"}

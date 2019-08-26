@@ -5,23 +5,26 @@ import * as Icon from "@expo/vector-icons";
 
 const os = Platform.OS;
 
-const NavHeader = ({ openMenu }) => (
-  <Container style={{ marginTop: os === "android" ? 30 : null }}>
-    <TouchableOpacity onPress={openMenu}>
-      <IconView>
-        <Icon.Ionicons name="ios-menu" size={35} color="#454545" />
-      </IconView>
-    </TouchableOpacity>
-    <Logo source={require("../../assets/logo.png")} />
-  </Container>
-);
+class NavHeader extends React.Component {
+  render() {
+    return (
+      <Container style={{ marginTop: os === "android" ? 30 : null }}>
+        <TouchableOpacity onPress={() => this.props.openDrawer()}>
+          <IconView>
+            <Icon.Ionicons name="ios-menu" size={35} color="#454545" />
+          </IconView>
+        </TouchableOpacity>
+        <Logo source={require("../../assets/logo.png")} />
+      </Container>
+    );
+  }
+}
 
 export default NavHeader;
 
 const Container = styled.View`
   width: 100%;
   height: 50px;
-  /* background: ${props => props.background || "#fff"}; */
 `;
 
 const Logo = styled.Image`

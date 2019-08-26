@@ -10,7 +10,7 @@ class InspirationScreen extends React.Component {
   render() {
     return (
       <SafeAreaView>
-        <NavHeader />
+        <NavHeader openDrawer={this.props.navigation.openDrawer} />
         <Container>
           <Section background="rgba(0,0,0,0.3)">
             <TouchableOpacity
