@@ -24,7 +24,7 @@ class CompleteScreen extends React.Component {
     return (
       <SafeAreaView>
         <Container>
-          <NavHeader />
+          <NavHeader openDrawer={this.props.navigation.openDrawer} />
           <CheckoutTopSection activeScreen="complete" />
           <TopSection>
             <Checkmark />

@@ -38,7 +38,7 @@ class ShoppingScreen extends React.Component {
         <StatusBar barStyle="light-content" />
         <ScrollView>
           <Container>
-            <NavHeader />
+            <NavHeader openDrawer={this.props.navigation.openDrawer} />
             <TopBanner />
             <TouchableWithoutFeedback
               onPress={() => this.props.navigation.push("MenShop")}

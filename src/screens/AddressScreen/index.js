@@ -29,8 +29,6 @@ import {
   Column,
   DeliverButton,
   Title,
-  Text,
-  Wrapper,
   AddressText
 } from "./styles";
 

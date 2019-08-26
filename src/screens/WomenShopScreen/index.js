@@ -50,7 +50,7 @@ class MenShoppingScreen extends React.Component {
       <Container>
         <ScrollView showsVerticalScrollIndicator={false}>
           <SafeAreaView />
-          <NavHeader />
+          <NavHeader openDrawer={this.props.navigation.openDrawer} />
           <OutwearHeader title="women" background={colors.pink} />
           <LowerNav type="women" />
           {loading ? (

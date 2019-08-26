@@ -39,7 +39,7 @@ class StoresScreen extends React.Component {
     return (
       <SafeAreaView>
         <Container>
-          <NavHeader />
+          <NavHeader openDrawer={this.props.navigation.openDrawer} />
           <Map>
             <StoreModal
               showModal={this.state.showModal}

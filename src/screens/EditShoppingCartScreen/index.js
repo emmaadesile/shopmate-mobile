@@ -72,7 +72,7 @@ class EditShoppingCartScreen extends React.Component {
 
     return (
       <SafeAreaView>
-        <NavHeader />
+        <NavHeader openDrawer={this.props.navigation.openDrawer} />
         <Container>
           <TopSection>
             <TopText>edit item</TopText>
