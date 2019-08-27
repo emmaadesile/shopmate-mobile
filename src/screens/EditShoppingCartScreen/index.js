@@ -31,15 +31,15 @@ class EditShoppingCartScreen extends React.Component {
     price: "",
     quantity: "",
     producId: "",
-    itemId: "",
-    reloadCart: false
+    itemId: ""
   };
 
   componentDidMount() {
-    const name = this.props.navigation.getParam("name");
-    const price = this.props.navigation.getParam("price");
-    const quantity = this.props.navigation.getParam("quantity");
-    const itemId = this.props.navigation.getParam("itemId");
+    const { getParam } = this.props.navigation;
+    const name = getParam("name");
+    const price = getParam("price");
+    const quantity = getParam("quantity");
+    const itemId = getParam("itemId");
 
     this.setState({ name, price, quantity, itemId });
   }

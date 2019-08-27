@@ -7,8 +7,24 @@ import ShoppingBag from "./ShoppingBag";
 
 class Bag extends React.Component {
   render() {
-    const { products, tabNav } = this.props;
+    const {
+      products,
+      tabNav,
+      deleteItemSuccess,
+      addProductSuccessMessage
+    } = this.props;
     const productsCount = products.length;
+
+    let updatedProductCount = productsCount;
+
+    if (deleteItemSuccess) {
+      updatedProductCount = Number(productsCount) - 1;
+    }
+
+    if (addProductSuccessMessage) {
+      updatedProductCount = Number(productsCount) + 1;
+    }
+
     return !tabNav ? (
       <>
         <ShoppingBag
@@ -17,13 +33,13 @@ class Bag extends React.Component {
           innerStrokeColor={this.props.innerStrokeColor}
           innerFillColor={this.props.innerFillColor}
         />
-        {productsCount > 0 ? (
+        {updatedProductCount > 0 ? (
           <BagContainer2
             background={!tabNav && "#F3B453"}
             border={!tabNav && "#404040"}
           >
             <BagCount color={!tabNav && "#454545"} fontSize={!tabNav && 14}>
-              {productsCount}
+              {updatedProductCount}
             </BagCount>
           </BagContainer2>
         ) : null}
@@ -49,10 +65,10 @@ class Bag extends React.Component {
           innerStrokeColor={this.props.innerStrokeColor}
           innerFillColor={this.props.innerFillColor}
         />
-        {productsCount > 0 ? (
+        {updatedProductCount > 0 ? (
           <BagContainer>
             <BagCount color={!tabNav && "#454545"} fontSize={!tabNav && 14}>
-              {productsCount}
+              {updatedProductCount}
             </BagCount>
           </BagContainer>
         ) : null}
@@ -60,6 +76,27 @@ class Bag extends React.Component {
     );
   }
 }
+
+const BagCount = styled.Text`
+  font-family: sourceSansProBold;
+  color: ${props => props.color || "#fff"};
+  font-size: ${props => props.fontSize || "11px"};
+`;
+
+const mapStateToProps = state => ({
+  products: state.getProductsInShoppingCart.products,
+  deleteItemSuccess: state.deleteItemFromCart.message,
+  addProductSuccessMessage: state.addProductsToShoppingCart.products.message
+});
+
+const mapDispatchToProps = dispatch => ({
+  getProductsInShoppingCart: () => dispatch(getProductsInShoppingCart())
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Bag);
 
 const Container = styled.View`
   width: 88px;
@@ -103,22 +140,3 @@ const BagContainer2 = styled.View`
   top: -5px;
   right: -10px;
 `;
-
-const BagCount = styled.Text`
-  font-family: sourceSansProBold;
-  color: ${props => props.color || "#fff"};
-  font-size: ${props => props.fontSize || "11px"};
-`;
-
-const mapStateToProps = state => ({
-  products: state.getProductsInShoppingCart.products
-});
-
-const mapDispatchToProps = dispatch => ({
-  getProductsInShoppingCart: () => dispatch(getProductsInShoppingCart())
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Bag);

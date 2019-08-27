@@ -7,7 +7,8 @@ import {
 const initialState = {
   loading: false,
   message: "",
-  error: ""
+  error: "",
+  itemId: 0
 };
 
 const reducer = (state = initialState, action) => {
@@ -21,7 +22,8 @@ const reducer = (state = initialState, action) => {
     case DELETE_ITEM_FROM_CART_SUCCESS:
       return {
         ...state,
-        message: action.payload
+        message: action.payload.message,
+        itemId: action.payload.itemId
       };
 
     case DELETE_ITEM_FROM_CART_ERROR:
