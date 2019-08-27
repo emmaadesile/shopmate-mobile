@@ -11,9 +11,9 @@ const deleteItemFromCartLoading = loading => ({
   payload: loading
 });
 
-const deleteItemFromCartSuccess = message => ({
+const deleteItemFromCartSuccess = (message, itemId) => ({
   type: DELETE_ITEM_FROM_CART_SUCCESS,
-  payload: message
+  payload: { message, itemId }
 });
 
 const deleteItemFromCartError = error => ({
@@ -31,10 +31,10 @@ const deleteItemFromCart = itemId => dispatch => {
 
       if (response.status === 200) {
         const message = "Item was deleted from the cart";
-        dispatch(deleteItemFromCartSuccess(message));
+        dispatch(deleteItemFromCartSuccess({ message, itemId }));
 
         showMessage({
-          message: "Item was deleted from the cart",
+          message,
           type: "success",
           animationDuration: 500
         });

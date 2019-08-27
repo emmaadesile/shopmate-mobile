@@ -225,7 +225,6 @@ class AddressScreen extends React.Component {
                       <TouchableOpacity
                         onPress={() => this.props.navigation.push("Payment")}
                       >
-                        {/* <View style={{ paddingLeft: 15, paddingRight: 15 }}> */}
                         <Title>ship to</Title>
                         <DeliverButton>
                           <View width="90%">
@@ -245,7 +244,6 @@ class AddressScreen extends React.Component {
                             selectedButtonColor={"#EFB961"}
                           />
                         </DeliverButton>
-                        {/* </View> */}
                       </TouchableOpacity>
                     )}
                     <Title>enter a new address</Title>

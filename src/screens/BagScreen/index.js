@@ -107,14 +107,27 @@ class BagScreen extends React.Component {
   };
 
   render() {
-    const { products, loading } = this.props;
+    const { products, loading, deleteItemSuccess, deletedItemId } = this.props;
+
+    let updatedProducts;
+
+    if (deleteItemSuccess) {
+      updatedProducts = products.filter(
+        product => product.item_id !== deletedItemId
+      );
+    } else {
+      updatedProducts = products;
+    }
 
     return (
       <SafeAreaView>
-        <NavHeader background="#F2F2F2" />
+        <NavHeader
+          background="#F2F2F2"
+          openDrawer={this.props.navigation.openDrawer}
+        />
         {loading ? (
           <Loading />
-        ) : products.length === 0 ? (
+        ) : updatedProducts.length === 0 ? (
           this.renderEmptyCart()
         ) : (
           <ScrollView>
@@ -140,7 +153,7 @@ class BagScreen extends React.Component {
               </TopSection>
               <ProductWrapper>
                 <Divider />
-                {products.map(product => (
+                {updatedProducts.map(product => (
                   <React.Fragment key={product.item_id}>
                     <Product>
                       <Image />
@@ -212,16 +225,20 @@ class BagScreen extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  loading: state.getProductsInShoppingCart.loading,
-  products: state.getProductsInShoppingCart.products,
-  error: state.getProductsInShoppingCart.error,
+const mapStateToProps = state => {
+  return {
+    loading: state.getProductsInShoppingCart.loading,
+    products: state.getProductsInShoppingCart.products,
+    error: state.getProductsInShoppingCart.error,
 
-  deleteItemSuccess: state.deleteItemFromCart.message
-});
+    deleteItemSuccess: state.deleteItemFromCart.message.message,
+    deletedItemId: state.deleteItemFromCart.message.itemId
+  };
+};
 
 const mapDispatchToProps = dispatch => ({
-  getProductsInshoppingCart: () => dispatch(getProductsInshoppingCart())
+  getProductsInshoppingCart: () => dispatch(getProductsInshoppingCart()),
+  updateProductsInCart: () => dispatch(updateCart())
 });
 
 export default connect(
