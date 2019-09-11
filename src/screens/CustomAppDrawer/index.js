@@ -67,7 +67,9 @@ const CustomAppDrawer = ({ navigation: { navigate } }) => {
       <LowerSection>
         <Text>My Account</Text>
         <Line />
-        <Text>Customer Support</Text>
+        <TouchableOpacity onPress={() => navigate("CustomerSupport")}>
+          <Text>Customer Support</Text>
+        </TouchableOpacity>
         <Line />
         <Text color="#F3B453">Logout</Text>
         <Line />
