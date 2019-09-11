@@ -2,7 +2,6 @@ import React from "react";
 import { Provider } from "react-redux";
 import FlashMessage from "react-native-flash-message";
 import AppNavigator from "./src/navigator/AppNavigator";
-import AppDrawerNavigator from "./src/navigator/AppDrawerNavigiator";
 import store from "./src/store";
 import * as Font from "expo-font";
 
@@ -31,7 +30,6 @@ export default class App extends React.Component {
         {this.state.fontLoaded ? (
           <React.Fragment>
             <AppNavigator />
-            {/* <AppDrawerNavigator /> */}
             <FlashMessage position="top" />
           </React.Fragment>
         ) : null}
